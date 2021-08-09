@@ -2,10 +2,39 @@
 #define ExG4PrimaryGeneratorAction_hh
 #include <iostream>
 #include <fstream>
+#include <math.h>
+#include <time.h>
+#include <map>
+#include <TROOT.h>
+#include <TSystem.h>
+#include <TStyle.h>
+#include <TCutG.h>
+#include <TChain.h>
+#include <TMinuit.h>
+#include "TChain.h"
+#include "TStyle.h"
+#include "TCanvas.h"
+#include "TEllipse.h"
+#include "TString.h"
+#include "TGraph.h"
+#include "TSpectrum.h"
+#include "TVirtualFitter.h"
+#include "TRandom.h"
+#include <TRandom3.h>
+#include "TFile.h"
+#include "TTree.h"
+#include "TH1.h"
+#include "TH2.h"
+#include "TH3.h"
+#include "TF1.h"
+#include "TMath.h"
+#include "TPaveText.h"
+#include "TPad.h"
 #include "string.h"
 #include "stdlib.h"
 #include "stdio.h"
-#include <math.h>
+#include "TLegend.h"
+#include "TPaletteAxis.h"
 #include "G4VUserPrimaryGeneratorAction.hh"
 #include "G4ThreeVector.hh"
 #include "globals.hh"
@@ -46,23 +75,35 @@ private:
 	double branch_lit_tot;
 	int numpeaks;
 
+	G4double Qvalue;
+	G4double atomic_mass_unit; // 931.5 MeV/c2
+	G4double Atarget; // AX
+	G4double Abeam; // Aa
+	G4double Arecoil; // AY
+	G4double Aejectile; // Ab
+	G4double Eejectile; // Eb
+	G4double Erecoil; // EY
+	G4double Ebeam; // Ea
+	G4double Pejectile; // pb
+	G4double Precoil; // pY
+	G4double Pbeam; // pa
+	G4int Zrecoil,Zejectile;
+	G4double tau;
 	G4double ioncharge;
 	G4double lifetime;
 	G4double branch_integ;
-	G4double Erecoil;
-	G4double tau;
-	G4int Z_r,A_r,Z_p,A_p;
-	G4double excitE;
+	//G4double emg_sig,emg_sigp0,emg_sigp1,emg_tau,emg_taup0,emg_taup1;
+	G4double ExcitationE;
 	G4double resolution;
-	G4double costheta_n1,costheta_n2,costheta_recoil;
-	G4double phi_n1,phi_n2,phi_recoil;
-	G4double sintheta_n1,sintheta_n2,sintheta_recoil;
+	G4double costheta_p1,costheta_p2,costheta_recoil;
+	G4double phi_p1,phi_p2,phi_recoil;
+	G4double theta_p1,theta_p2,theta_recoil;
+	G4double sintheta_p1,sintheta_p2,sintheta_recoil;
 	G4double dirx;
 	G4double diry;
 	G4double dirz;
 	G4ThreeVector position;
 	G4ThreeVector momentumDirection;
-
 
 };
 

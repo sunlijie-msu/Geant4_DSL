@@ -1,5 +1,12 @@
-with escape
-DSSD1 has blue shifted ¦Ã rays
-DSSD3 has red shifted ¦Ã rays
-DSSD2 is the aluminum foil with a thickness of 1 mm.
-source is at (0,0,66.9 nm)
+DSL simulation
+VMware can use these files.
+
+cdd
+cd /home/sun/app/HPGe_DSL-build
+
+1) cmd
+cmake -DGeant4_DIR=/home/sun/app/geant4.10.02-install/lib/Geant4-10.2.3 /mnt/hgfs/HPGe_DSL
+
+2) make
+
+3) ./tele vis
