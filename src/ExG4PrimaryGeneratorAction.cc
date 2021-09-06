@@ -111,7 +111,7 @@ ExG4PrimaryGeneratorAction::~ExG4PrimaryGeneratorAction()
 void ExG4PrimaryGeneratorAction::GeneratePrimaries(G4Event *anEvent)
 {
 	//G4cout<<"(1)$ before event, by event, ExG4PrimaryGeneratorAction::GeneratePrimaries(G4Event *anEvent)"<<G4endl;
-
+	gRandom->SetSeed(0);
 //	xygaus->GetRandom2(x0,y0); // 2D Gaussian beam spot  // Return two random numbers to x0 and y0 following this function shape.
 	r_beam = sqrt(gRandom->Uniform(0,1))*Rmax;  // 2D Uniform beam spot
 	theta_beam = gRandom->Uniform(0,2.*3.14159);  // 2D Uniform beam spot
@@ -218,17 +218,17 @@ void ExG4PrimaryGeneratorAction::GeneratePrimaries(G4Event *anEvent)
 // 	dirz=costheta_recoil;//isotropy
 
 //	Ebeam=128*CLHEP::MeV;
-	Ebeam=CLHEP::RandGauss::shoot(128,128*0.002/2.355)*CLHEP::MeV;//Energy loss in gold foil
-	Ebeam=Ebeam-z0*1000*10.600; // stopping power of 128-MeV 32S in gold is approximately 10.6 MeV/um, z0 was the depth of 3He in units of mm.
+ 	Ebeam=CLHEP::RandGauss::shoot(128,128*0.002/2.355)*CLHEP::MeV;//Energy loss in gold foil
+ 	Ebeam=Ebeam-z0*1000*10.600; // stopping power of 128-MeV 32S in gold is approximately 10.6 MeV/um, z0 was the depth of 3He in units of mm.
 	//G4cout<<Ebeam/CLHEP::MeV<<endl;
 
 	atomic_mass_unit = 931.49410242; // MeV/c2
 	Abeam=32; // 32S
 
 	 // 31S + 4He
-// 	Atarget=3; Zrecoil=16; Arecoil=31; Zejectile=2; Aejectile=4;
-// 	Qvalue=5.533*CLHEP::MeV; // gs Q-value
-// 	Excitation_recoil=6390*CLHEP::keV; tau=10; //half-life in fs // 31S
+	Atarget=3; Zrecoil=16; Arecoil=31; Zejectile=2; Aejectile=4;
+	Qvalue=5.533*CLHEP::MeV; // gs Q-value
+	Excitation_recoil=1248.9836*CLHEP::keV; tau=500; //half-life in fs // 31S
 	//Identical Doppler shift regardless of final states defined in the data/PhotonEvaporation3.2/z.a (Verified)
 
 	// 34Ar + 1n, should be the same kinematics as 34Cl + 1H
@@ -245,9 +245,9 @@ void ExG4PrimaryGeneratorAction::GeneratePrimaries(G4Event *anEvent)
 //	Excitation_recoil=3983*CLHEP::keV; tau=131; //fs // 34Cl
 
 	// 33Cl + 2H
- 	Atarget=3; Zrecoil=17; Arecoil=33; Zejectile=1; Aejectile=2;
- 	Qvalue=-3.22*CLHEP::MeV; // gs Q-value
-	Excitation_recoil=1986*CLHEP::keV; tau=55; //fs // 44Ti
+//  	Atarget=3; Zrecoil=17; Arecoil=33; Zejectile=1; Aejectile=2;
+//  	Qvalue=-3.22*CLHEP::MeV; // gs Q-value
+// 	Excitation_recoil=1986*CLHEP::keV; tau=55; //fs // 44Ti
 
 	// 41Ca + 3He
 // 	Atarget=12; Zrecoil=20; Arecoil=41; Zejectile=2; Aejectile=3;
@@ -255,6 +255,11 @@ void ExG4PrimaryGeneratorAction::GeneratePrimaries(G4Event *anEvent)
 // 	Excitation_recoil=3731*CLHEP::keV; tau=45; //fs // 41Ca
 // 	Excitation_recoil=3740*CLHEP::keV; tau=20; //fs // 41Ca
 //	Excitation_recoil=4328*CLHEP::keV; tau=80; //fs // 41Ca
+
+	// 41Ca + 3He + 4He
+// 	Atarget=16; Zrecoil=20; Arecoil=41; Zejectile=4; Aejectile=7;
+// 	Qvalue=-11.4*CLHEP::MeV; // gs Q-value
+// 	Excitation_recoil=4328*CLHEP::keV; tau=80; //fs // 41Ca
 
 	// 42Sc + 2H
 // 	Atarget=12; Zrecoil=21; Arecoil=42; Zejectile=1; Aejectile=2;
@@ -275,7 +280,12 @@ void ExG4PrimaryGeneratorAction::GeneratePrimaries(G4Event *anEvent)
 	// 33Cl + 2H
 // 	Atarget=16; Zrecoil=22; Arecoil=44; Zejectile=2; Aejectile=4;
 // 	Qvalue=4.37*CLHEP::MeV; // gs Q-value
-//	Excitation_recoil=4116*CLHEP::keV; tau=110; //fs // 44Ti
+//	Excitation_recoil=4116*CLHEP::keV; tau=110; //fs // 33Cl
+
+	// 30P + 1H + 4He
+// 	Atarget=3; Zrecoil=15; Arecoil=30; Zejectile=3; Aejectile=5;
+// 	Qvalue=-0.597*CLHEP::MeV; // gs Q-value
+// 	Excitation_recoil=4144*CLHEP::keV; tau=30; //fs // 30P
 
 	Excitation_ejectile=0; // don't change
 	Qvalue = Qvalue - Excitation_recoil; // effective Q-value. don't change
@@ -287,8 +297,8 @@ void ExG4PrimaryGeneratorAction::GeneratePrimaries(G4Event *anEvent)
 	
 	
 	//single particle isotropic emission
-	costheta_p1=CLHEP::RandFlat::shoot(0.90,1.);//alpha particles emitted at forward angles along z-axis. starting point!
-	//(0.57,1.) = <55 deg, (0.71,1.) = <45 deg, (0.97,1.) = <14 deg, (-1.,1.) 180 deg
+	costheta_p1=CLHEP::RandFlat::shoot(0.9,1.);//alpha particles emitted at forward angles along z-axis. starting point!
+	//(0.57,1.) = <55 deg, (0.71,1.) = <45 deg, (0.97,1.) = <14 deg, (0.979,1.) = <11.6 deg, (-1.,1.) 180 deg
 	phi_p1=CLHEP::RandFlat::shoot(0.,2.*3.14159);//isotropy
 	theta_p1=acos(costheta_p1);
 	//G4cout<<"------------ phi="<<phi<<' '<<"costheta="<<costheta<<G4endl;
@@ -346,8 +356,8 @@ void ExG4PrimaryGeneratorAction::GeneratePrimaries(G4Event *anEvent)
 	dirz=costheta_recoil;//isotropy
 	//calculate Erecoil from selected theta_recoil, here it should be "-" sign before sqrt
 	//Erecoil=(sqrt(Abeam*Arecoil*Ebeam)/(Aejectile+Arecoil)*costheta_recoil-sqrt(((Aejectile-Abeam)/(Aejectile+Arecoil)+Abeam*Arecoil/((Aejectile+Arecoil)*(Aejectile+Arecoil))*(costheta_recoil*costheta_recoil))*Ebeam+Aejectile/(Aejectile+Arecoil)*Qvalue))*(sqrt(Abeam*Arecoil*Ebeam)/(Aejectile+Arecoil)*costheta_recoil-sqrt(((Aejectile-Abeam)/(Aejectile+Arecoil)+Abeam*Arecoil/((Aejectile+Arecoil)*(Aejectile+Arecoil))*(costheta_recoil*costheta_recoil))*Ebeam+Aejectile/(Aejectile+Arecoil)*Qvalue)); // check
-	G4cout<<"++++++++++++  Ealpha=	"<<Eejectile/CLHEP::MeV<<"	MeV	theta_p1=	"<<theta_p1/CLHEP::deg<<"	deg	Palpha=	"<<Pejectile<<"	MeV/c"<<G4endl; // formula verified
-	G4cout<<"++++++++++++  E31S=	"<<Erecoil/CLHEP::MeV<<"	MeV	theta_recoil=	"<<theta_recoil/CLHEP::deg<<"	deg	P31S=	"<<Precoil<<"	MeV/c"<<G4endl; // formula verified
+// 	G4cout<<"E_p1=	"<<Eejectile/CLHEP::MeV<<"	MeV	theta_p1=	"<<theta_p1/CLHEP::deg<<"	deg	P_p1=	"<<Pejectile<<"	MeV/c"<<G4endl; // formula verified
+// 	G4cout<<"E_recoil=	"<<Erecoil/CLHEP::MeV<<"	MeV	theta_recoil=	"<<theta_recoil/CLHEP::deg<<"	deg	P_recoil=	"<<Precoil<<"	MeV/c"<<G4endl; // formula verified
 	
 	//position=G4ThreeVector(x0*CLHEP::mm,y0*CLHEP::mm,z0*CLHEP::mm);// 2D beam spot
 	//position=G4ThreeVector(0.*CLHEP::mm,0.*CLHEP::mm,0.*CLHEP::mm);// point source, usually for check, validation and test
