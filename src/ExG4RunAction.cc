@@ -75,7 +75,7 @@ ExG4RunAction::~ExG4RunAction()
 void ExG4RunAction::BeginOfRunAction(const G4Run*)
 {
   G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
-  analysisManager->OpenFile("ExG4");//output root file
+  analysisManager->OpenFile("ExG4.root");//output root file
   //ofstream outresultfile("out.txt",ios::out);//定义输出文件流对象outbeamfile，以输出方式打开磁盘文件，这里是by run的。
   G4cout<<"5$ first in run, by run, ExG4RunAction::BeginOfRunAction(const G4Run*)"<<G4endl;
 }

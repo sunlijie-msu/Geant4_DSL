@@ -228,7 +228,7 @@ void ExG4PrimaryGeneratorAction::GeneratePrimaries(G4Event *anEvent)
 	 // 31S + 4He
 	Atarget=3; Zrecoil=16; Arecoil=31; Zejectile=2; Aejectile=4;
 	Qvalue=5.533*CLHEP::MeV; // gs Q-value
-	Excitation_recoil=1248.9836*CLHEP::keV; tau=500; //half-life in fs // 31S
+	Excitation_recoil=1249.1836*CLHEP::keV; tau=1000; //half-life in fs // 31S
 	//Identical Doppler shift regardless of final states defined in the data/PhotonEvaporation3.2/z.a (Verified)
 
 	// 34Ar + 1n, should be the same kinematics as 34Cl + 1H
@@ -297,8 +297,8 @@ void ExG4PrimaryGeneratorAction::GeneratePrimaries(G4Event *anEvent)
 	
 	
 	//single particle isotropic emission
-	costheta_p1=CLHEP::RandFlat::shoot(0.9,1.);//alpha particles emitted at forward angles along z-axis. starting point!
-	//(0.57,1.) = <55 deg, (0.71,1.) = <45 deg, (0.97,1.) = <14 deg, (0.979,1.) = <11.6 deg, (-1.,1.) 180 deg
+	costheta_p1=CLHEP::RandFlat::shoot(0.94,1.);//alpha particles emitted at forward angles along z-axis. starting point!
+	//(0.57,1.) = <55 deg, (0.71,1.) = <45 deg, (0.94,1.) = <20 deg, (0.97,1.) = <14 deg, (0.979,1.) = <11.6 deg, (-1.,1.) 180 deg
 	phi_p1=CLHEP::RandFlat::shoot(0.,2.*3.14159);//isotropy
 	theta_p1=acos(costheta_p1);
 	//G4cout<<"------------ phi="<<phi<<' '<<"costheta="<<costheta<<G4endl;
