@@ -19,7 +19,7 @@
 
 ExG4DetectorConstruction::ExG4DetectorConstruction():G4VUserDetectorConstruction(),physiDSSD1(0),physiDSSD2(0),physiTarget(0),physiClover(0),physiCollimator(0),physiChamber(0),physiHousing(0),silicon(0),germanium(0),gold(0),iron(0),carbon(0),csi(0),vacuum(0)
 {
-	Use_DSL=1; // DSL=1 or 2 is used
+	Use_DSL=2; // DSL=1 or 2 is used.
 }
 
 ExG4DetectorConstruction::~ExG4DetectorConstruction()
@@ -28,7 +28,7 @@ ExG4DetectorConstruction::~ExG4DetectorConstruction()
 G4VPhysicalVolume* ExG4DetectorConstruction::Construct()
 {
 	ConstructMaterials();
-	G4bool checkOverlaps = false; // sometimes, true slows down too much
+	G4bool checkOverlaps = false; // use true sometimes, true slows down too much
 
 // 	G4Tubs(const G4String &pname, // name 
 // 		G4double pRmin, // inner radius 
@@ -54,7 +54,7 @@ G4VPhysicalVolume* ExG4DetectorConstruction::Construct()
 
 
 
-	if(Use_DSL==1)//DSL1 is used
+	if(Use_DSL==1)//DSL1 is used. Don't change the number.
 	{
 
 		//DSSD1
@@ -75,7 +75,7 @@ G4VPhysicalVolume* ExG4DetectorConstruction::Construct()
 
 		//DSSD1_Window_Front
 		G4VSolid* solidDSSD1_Window_Front
-			= new G4Tubs("solidDSSD1_Window_Front",0*mm, 6.91*mm, 0.000080/2.*mm,	0.*deg, 	360.*deg);//DSL1 DE dead layer front
+			= new G4Tubs("solidDSSD1_Window_Front",0*mm, 6.91*mm, 0.000080/2.*mm,	0.*deg, 	360.*deg);//DSL1 DE doped silicon dead layer window front
 		logicDSSD1_Window_Front
 			= new G4LogicalVolume(solidDSSD1_Window_Front,silicon,"logicDSSD1_Window_Front");
 		physiDSSD1_Window_Front
@@ -83,7 +83,7 @@ G4VPhysicalVolume* ExG4DetectorConstruction::Construct()
 
 		//DSSD1_Window_Back
 		G4VSolid* solidDSSD1_Window_Back
-			= new G4Tubs("solidDSSD1_Window_Back",0*mm, 6.91*mm, 0.000225/2.*mm,	0.*deg, 	360.*deg);//DSL1 DE dead layer back
+			= new G4Tubs("solidDSSD1_Window_Back",0*mm, 6.91*mm, 0.000225/2.*mm,	0.*deg, 	360.*deg);//DSL1 DE doped silicon dead layer window back
 		logicDSSD1_Window_Back
 			= new G4LogicalVolume(solidDSSD1_Window_Back,silicon,"logicDSSD1_Window_Back");
 		physiDSSD1_Window_Back
@@ -108,7 +108,7 @@ G4VPhysicalVolume* ExG4DetectorConstruction::Construct()
 
 		//DSSD2_Window_Front
 		G4VSolid* solidDSSD2_Window_Front
-			= new G4Tubs("solidDSSD2_Window_Front",0*mm, 6.91*mm, 0.000080/2.*mm,	0.*deg, 	360.*deg);//DSL1 ER dead layer front
+			= new G4Tubs("solidDSSD2_Window_Front",0*mm, 6.91*mm, 0.000080/2.*mm,	0.*deg, 	360.*deg);//DSL1 ER doped silicon dead layer window front
 		logicDSSD2_Window_Front
 			= new G4LogicalVolume(solidDSSD2_Window_Front,silicon,"logicDSSD2_Window_Front");
 		physiDSSD2_Window_Front
@@ -116,7 +116,7 @@ G4VPhysicalVolume* ExG4DetectorConstruction::Construct()
 
 		//DSSD2_Window_Back
 		G4VSolid* solidDSSD2_Window_Back
-			= new G4Tubs("solidDSSD2_Window_Back",0*mm, 6.91*mm, 0.000225/2.*mm,	0.*deg, 	360.*deg);//DSL1 ER dead layer back
+			= new G4Tubs("solidDSSD2_Window_Back",0*mm, 6.91*mm, 0.000225/2.*mm,	0.*deg, 	360.*deg);//DSL1 ER doped silicon dead layer window back
 		logicDSSD2_Window_Back
 			= new G4LogicalVolume(solidDSSD2_Window_Back,silicon,"logicDSSD2_Window_Back");
 		physiDSSD2_Window_Back
@@ -178,13 +178,15 @@ G4VPhysicalVolume* ExG4DetectorConstruction::Construct()
 
 
 
+	
 
-	if(Use_DSL==2)//DSL2 is used
+
+	if(Use_DSL==2)//DSL2 is used. Don't change the number.
 	{
 
 		//DSSD1
 		G4VSolid* solidDSSD1
-			= new G4Box("solidDSSD1",50./2.*mm,50./2.*mm,0.14/2.*mm);//DSL2 DE active area
+			= new G4Box("solidDSSD1",49.5/2.*mm,49.5/2.*mm,0.138/2.*mm);//DSL2 DE active area
 		logicDSSD1
 			= new G4LogicalVolume(solidDSSD1,silicon,"logicDSSD1");
 		physiDSSD1
@@ -192,9 +194,9 @@ G4VPhysicalVolume* ExG4DetectorConstruction::Construct()
 
 		//DSSD1_Chip
 		G4VSolid* solidDSSD1_Wafer
-			= new G4Box("solidDSSD1_Wafer",53.78/2.*mm,53.78/2.*mm,0.14/2.*mm);//DE Chip inactive area
+			= new G4Box("solidDSSD1_Wafer",53.78/2.*mm,53.78/2.*mm,0.139/2.*mm);//DE Chip inactive area
 		G4VSolid* solidDSSD1_Active
-			= new G4Box("solidDSSD1_Active",50./2.*mm,50./2.*mm,0.15/2.*mm);
+			= new G4Box("solidDSSD1_Active",49.5/2.*mm,49.5/2.*mm,0.15/2.*mm);
 		G4SubtractionSolid* solidDSSD1_Chip
 			= new G4SubtractionSolid("solidDSSD1_Chip",solidDSSD1_Wafer, solidDSSD1_Active, 0, G4ThreeVector(0,0,0));
 		logicDSSD1_Chip
@@ -216,24 +218,39 @@ G4VPhysicalVolume* ExG4DetectorConstruction::Construct()
 
 		//DSSD1_Window_Front
 		G4VSolid* solidDSSD1_Window_Front
-			= new G4Box("solidDSSD1",50./2.*mm,50./2.*mm,0.001/2.*mm);//DSL1 DE dead layer front
+			= new G4Box("solidDSSD1_Window_Front",49.5/2.*mm,49.5/2.*mm,0.0005/2.*mm);//DSL1 DE doped silicon dead layer window front
 		logicDSSD1_Window_Front
-			= new G4LogicalVolume(solidDSSD1_Window_Front,aluminum,"logicDSSD1_Window_Front");
+			= new G4LogicalVolume(solidDSSD1_Window_Front,silicon,"logicDSSD1_Window_Front");
 		physiDSSD1_Window_Front
-			= new G4PVPlacement(0,G4ThreeVector(0,0,(18.38-0.14/2.-0.001/2.)*mm),logicDSSD1_Window_Front,"physiDSSD1_Window_Front",logicWorld,false,0,checkOverlaps);//10-0.010/2-0.0005/2=9.99475
+			= new G4PVPlacement(0,G4ThreeVector(0,0,(18.38-0.138/2.-0.0005/2.)*mm),logicDSSD1_Window_Front,"physiDSSD1_Window_Front",logicWorld,false,0,checkOverlaps);//10-0.010/2-0.0005/2=9.99475
 
 		//DSSD1_Window_Back
 		G4VSolid* solidDSSD1_Window_Back
-			= new G4Box("solidDSSD1",50./2.*mm,50./2.*mm,0.001/2.*mm);//DSL1 DE dead layer back
+			= new G4Box("solidDSSD1_Window_Back",49.5/2.*mm,49.5/2.*mm,0.0005/2.*mm);//DSL1 DE doped silicon dead layer window back
 		logicDSSD1_Window_Back
-			= new G4LogicalVolume(solidDSSD1_Window_Back,aluminum,"logicDSSD1_Window_Back");
+			= new G4LogicalVolume(solidDSSD1_Window_Back,silicon,"logicDSSD1_Window_Back");
 		physiDSSD1_Window_Back
-			= new G4PVPlacement(0,G4ThreeVector(0,0,(18.38+0.14/2.+0.001/2.)*mm),logicDSSD1_Window_Back,"physiDSSD1_Window_Back",logicWorld,false,0,checkOverlaps);//10+0.010/2+0.0005/2=10.00525
+			= new G4PVPlacement(0,G4ThreeVector(0,0,(18.38+0.138/2.+0.0005/2.)*mm),logicDSSD1_Window_Back,"physiDSSD1_Window_Back",logicWorld,false,0,checkOverlaps);//10+0.010/2+0.0005/2=10.00525
 
+		//DSSD1_Metal_Front
+		G4VSolid* solidDSSD1_Metal_Front
+			= new G4Box("solidDSSD1_Metal_Front", 49.5/2.*mm,49.5/2.*mm,0.0003/2.*mm);//DSL1 DE aluminum metal coverage front
+		logicDSSD1_Metal_Front
+			= new G4LogicalVolume(solidDSSD1_Metal_Front, aluminum, "logicDSSD1_Metal_Front");
+		physiDSSD1_Metal_Front
+			= new G4PVPlacement(0, G4ThreeVector(0, 0, (18.38-0.138/2.-0.0005-0.0003/2.) * mm), logicDSSD1_Metal_Front, "physiDSSD1_Metal_Front", logicWorld, false, 0, checkOverlaps);//10-0.010/2-0.0005/2=9.99475
+
+		//DSSD1_Metal_Back
+		G4VSolid* solidDSSD1_Metal_Back
+			= new G4Box("solidDSSD1_Metal_Back", 49.5/2.*mm,49.5/2.*mm,0.0003/2.*mm);//DSL1 DE aluminum metal coverage back
+		logicDSSD1_Metal_Back
+			= new G4LogicalVolume(solidDSSD1_Metal_Back, aluminum, "logicDSSD1_Metal_Back");
+		physiDSSD1_Metal_Back
+			= new G4PVPlacement(0, G4ThreeVector(0, 0, (18.38+0.138/2.+0.0005+0.0003/2.) * mm), logicDSSD1_Metal_Back, "physiDSSD1_Metal_Back", logicWorld, false, 0, checkOverlaps);//10+0.010/2+0.0005/2=10.00525
 
 		//DSSD2
 		G4VSolid* solidDSSD2
-			= new G4Box("solidDSSD2",50./2.*mm,50./2.*mm,1.0/2.*mm);//DSL2 Er active area
+			= new G4Box("solidDSSD2",49.5/2.*mm, 49.5 /2.*mm,1.010/2.*mm);//DSL2 Er active area
 		logicDSSD2
 			= new G4LogicalVolume(solidDSSD2,silicon,"logicDSSD2");
 		physiDSSD2
@@ -241,9 +258,9 @@ G4VPhysicalVolume* ExG4DetectorConstruction::Construct()
 
 		//DSSD2_Chip
 		G4VSolid* solidDSSD2_Wafer
-			= new G4Box("solidDSSD2_Wafer",53.78/2.*mm,53.78/2.*mm,1.0/2.*mm);//Er Chip inactive area
+			= new G4Box("solidDSSD2_Wafer",53.78/2.*mm,53.78/2.*mm,1.011/2.*mm);//Er Chip inactive area
 		G4VSolid* solidDSSD2_Active
-			= new G4Box("solidDSSD2_Active",50./2.*mm,50./2.*mm,1.1/2.*mm);
+			= new G4Box("solidDSSD2_Active", 49.5 /2.*mm, 49.5 /2.*mm,1.1/2.*mm);
 		G4SubtractionSolid* solidDSSD2_Chip
 			= new G4SubtractionSolid("solidDSSD2_Chip",solidDSSD2_Wafer, solidDSSD2_Active, 0, G4ThreeVector(0,0,0));
 		logicDSSD2_Chip
@@ -265,19 +282,35 @@ G4VPhysicalVolume* ExG4DetectorConstruction::Construct()
 
 		//DSSD2_Window_Front
 		G4VSolid* solidDSSD2_Window_Front
-			= new G4Box("solidDSSD2_Window_Front",50./2.*mm,50./2.*mm,0.001/2.*mm);//DSL2 ER dead layer front
+			= new G4Box("solidDSSD2_Window_Front",49.5/2.*mm,49.5/2.*mm,0.0005/2.*mm);//DSL2 ER doped silicon dead layer window front
 		logicDSSD2_Window_Front
-			= new G4LogicalVolume(solidDSSD2_Window_Front,aluminum,"logicDSSD2_Window_Front");
+			= new G4LogicalVolume(solidDSSD2_Window_Front,silicon,"logicDSSD2_Window_Front");
 		physiDSSD2_Window_Front
-			= new G4PVPlacement(0,G4ThreeVector(0,0,(24.11-1.0/2.0-0.001/2.)*mm),logicDSSD2_Window_Front,"physiDSSD2_Window_Front",logicWorld,false,0,checkOverlaps);//20-1.0/2-0.0005/2=19.49975
+			= new G4PVPlacement(0,G4ThreeVector(0,0,(24.11-1.010/2.0-0.0005/2.)*mm),logicDSSD2_Window_Front,"physiDSSD2_Window_Front",logicWorld,false,0,checkOverlaps);//20-1.0/2-0.0005/2=19.49975
 
 		//DSSD2_Window_Back
 		G4VSolid* solidDSSD2_Window_Back
-			= new G4Box("solidDSSD2_Window_Back",50./2.*mm,50./2.*mm,0.001/2.*mm);//DSL2 ER dead layer back
+			= new G4Box("solidDSSD2_Window_Back",49.5/2.*mm,49.5/2.*mm,0.0005/2.*mm);//DSL2 ER doped silicon dead layer window back
 		logicDSSD2_Window_Back
-			= new G4LogicalVolume(solidDSSD2_Window_Back,aluminum,"logicDSSD2_Window_Back");
+			= new G4LogicalVolume(solidDSSD2_Window_Back, silicon,"logicDSSD2_Window_Back");
 		physiDSSD2_Window_Back
-			= new G4PVPlacement(0,G4ThreeVector(0,0,(24.11+1.0/2.0+0.001/2.)*mm),logicDSSD2_Window_Back,"physiDSSD2_Window_Back",logicWorld,false,0,checkOverlaps);//20+1.0/2+0.0005/2=20.50025
+			= new G4PVPlacement(0,G4ThreeVector(0,0,(24.11+1.010/2.0+0.0005/2.)*mm),logicDSSD2_Window_Back,"physiDSSD2_Window_Back",logicWorld,false,0,checkOverlaps);//20+1.0/2+0.0005/2=20.50025
+
+		//DSSD2_Metal_Front
+		G4VSolid* solidDSSD2_Metal_Front
+			= new G4Box("solidDSSD2_Metal_Front",49.5/2.*mm,49.5/2.*mm,0.0003/2.*mm);//DSL1 DE aluminum metal coverage front
+		logicDSSD2_Metal_Front
+			= new G4LogicalVolume(solidDSSD2_Metal_Front, aluminum, "logicDSSD2_Metal_Front");
+		physiDSSD2_Metal_Front
+			= new G4PVPlacement(0, G4ThreeVector(0, 0, (24.11 - 1.010 / 2. - 0.0005 - 0.0003 / 2.) * mm), logicDSSD2_Metal_Front, "physiDSSD2_Metal_Front", logicWorld, false, 0, checkOverlaps);//10-0.010/2-0.0005/2=9.99475
+
+		//DSSD2_Metal_Back
+		G4VSolid* solidDSSD2_Metal_Back
+			= new G4Box("solidDSSD2_Metal_Back",49.5/2.*mm,49.5/2.*mm,0.0003/2.*mm);//DSL1 DE aluminum metal coverage back
+		logicDSSD2_Metal_Back
+			= new G4LogicalVolume(solidDSSD2_Metal_Back, aluminum, "logicDSSD2_Metal_Back");
+		physiDSSD2_Metal_Back
+			= new G4PVPlacement(0, G4ThreeVector(0, 0, (24.11 + 1.010 / 2. + 0.0005 + 0.0003 / 2.) * mm), logicDSSD2_Metal_Back, "physiDSSD2_Metal_Back", logicWorld, false, 0, checkOverlaps);//10+0.010/2+0.0005/2=10.00525
 
 		//DSL2 doesn't have a collimator
 
@@ -470,7 +503,7 @@ G4VPhysicalVolume* ExG4DetectorConstruction::Construct()
 	logicClover
 		= new G4LogicalVolume(FourClover,germanium,"logicClover");
 	physiClover //(78.26+148.9/2)=152.71
-		= new G4PVPlacement(0,G4ThreeVector(28.*mm,28.*mm,125.7*mm),logicClover,"physiClover",logicWorld,false,0,checkOverlaps);
+		= new G4PVPlacement(0,G4ThreeVector(28.*mm,28.*mm,(125.7+0.00)*mm),logicClover,"physiClover",logicWorld,false,0,checkOverlaps);
 
 
 	//aluminum crystal housing
@@ -539,7 +572,7 @@ G4VPhysicalVolume* ExG4DetectorConstruction::Construct()
 	logicHousing
 		= new G4LogicalVolume(back4,aluminum,"logicHousing");
 	physiHousing //(78.26+148.9/2)=152.71
-		= new G4PVPlacement(0,G4ThreeVector(0,0,77.7*mm),logicHousing,"physiHousing",logicWorld,false,0,checkOverlaps);
+		= new G4PVPlacement(0,G4ThreeVector(0,0,(77.7+0.00)*mm),logicHousing,"physiHousing",logicWorld,false,0,checkOverlaps);
 
 	
 
@@ -563,13 +596,28 @@ G4VPhysicalVolume* ExG4DetectorConstruction::Construct()
 	DetectorVisAtt = new G4VisAttributes(G4Colour::Blue());
 	logicDSSD2_Frame->SetVisAttributes(DetectorVisAtt);
 
-	DetectorVisAtt = new G4VisAttributes(G4Colour::Gray());
+	DetectorVisAtt = new G4VisAttributes(G4Colour::Yellow());
 	logicDSSD1_Window_Front->SetVisAttributes(DetectorVisAtt);
 	logicDSSD1_Window_Back->SetVisAttributes(DetectorVisAtt);
-
-	DetectorVisAtt = new G4VisAttributes(G4Colour::Gray());
 	logicDSSD2_Window_Front->SetVisAttributes(DetectorVisAtt);
-	logicDSSD1_Window_Back->SetVisAttributes(DetectorVisAtt);
+	logicDSSD2_Window_Back->SetVisAttributes(DetectorVisAtt);
+
+	if (Use_DSL == 2)//if DSL2 is used; DSL1 doesn't use metal and chip
+	{
+		DetectorVisAtt = new G4VisAttributes(G4Colour::Gray());
+		logicDSSD1_Metal_Front->SetVisAttributes(DetectorVisAtt);
+		logicDSSD1_Metal_Back->SetVisAttributes(DetectorVisAtt);
+		logicDSSD2_Metal_Front->SetVisAttributes(DetectorVisAtt);
+		logicDSSD2_Metal_Back->SetVisAttributes(DetectorVisAtt);
+
+		DetectorVisAtt = new G4VisAttributes(G4Colour::Brown());
+		logicDSSD1_Chip->SetVisAttributes(DetectorVisAtt);
+		logicDSSD2_Chip->SetVisAttributes(DetectorVisAtt);
+	}
+		
+	DetectorVisAtt = new G4VisAttributes(G4Colour::Cyan());
+	logicDSSD1->SetVisAttributes(DetectorVisAtt);
+	logicDSSD2->SetVisAttributes(DetectorVisAtt);
 
 	DetectorVisAtt = new G4VisAttributes(G4Colour::Green());
 	logicDetectorMount->SetVisAttributes(DetectorVisAtt);
@@ -588,7 +636,7 @@ G4VPhysicalVolume* ExG4DetectorConstruction::Construct()
 	DetectorVisAtt = new G4VisAttributes(G4Colour(0.,1.,1.,0.3));
 	logicHousing->SetVisAttributes(DetectorVisAtt); //GRIFFIN Al Housing
 
-	if (Use_DSL==1)//DSL1 is used
+	if (Use_DSL==1)//if DSL1 is used
 	{
 		DetectorVisAtt = new G4VisAttributes(G4Colour(0.5,0.5,0.5,0.3));
 		logicCollimator->SetVisAttributes(DetectorVisAtt); //DSL1 Collimator

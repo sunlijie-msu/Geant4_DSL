@@ -8,6 +8,7 @@
 #include "string.h"
 #include "stdlib.h"
 #include "stdio.h"
+
 using namespace std;
 ExG4RunAction::ExG4RunAction()
 : G4UserRunAction()
@@ -27,7 +28,7 @@ ExG4RunAction::ExG4RunAction()
   analysisManager->CreateH1("h1DSSD1e","h1DSSD1e",60000,0.,60000); // h1 ID=3//6000 is range, in what unit is defined in FillH1
   analysisManager->CreateH1("h1DSSD2e","h1DSSD2e",60000,0.,60000); // h1 ID=4//6000 is range, in what unit is defined in FillH1
   analysisManager->CreateH1("h1Targete","h1Targete",60000,0.,60000); // h1 ID=5//6000 is range, in what unit is defined in FillH1
-  analysisManager->CreateH1("h1Clovere","h1Clovere",8000,0.,8000); // h1 ID=6//6000 is range, in what unit is defined in FillH1
+  analysisManager->CreateH1("h1Clovere","h1Clovere",10000,0.,10000); // h1 ID=6//6000 is range, in what unit is defined in FillH1
   analysisManager->CreateH2("DSSD1XY","DSSD1XY",100,75.,125.,100,75.,125.); // h2 ID = 0
   analysisManager->CreateH2("DSSD2XY","DSSD2XY",100,75.,125.,100,75.,125.); // h2 ID = 1
   analysisManager->CreateH2("TargetXY","TargetXY",80,96.,104.,80,96.,104.); // h2 ID = 2
@@ -75,7 +76,8 @@ ExG4RunAction::~ExG4RunAction()
 void ExG4RunAction::BeginOfRunAction(const G4Run*)
 {
   G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
-  analysisManager->OpenFile("ExG4.root");//output root file
+  //analysisManager->OpenFile("/mnt/hgfs/out/G4_rootfiles_with_tree_Eg4156/ExG4.root");//output root file modify
+  analysisManager->OpenFile("Em/ExG4_Em.root");//output root file
   //ofstream outresultfile("out.txt",ios::out);//定义输出文件流对象outbeamfile，以输出方式打开磁盘文件，这里是by run的。
   G4cout<<"5$ first in run, by run, ExG4RunAction::BeginOfRunAction(const G4Run*)"<<G4endl;
 }

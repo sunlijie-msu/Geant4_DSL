@@ -55,9 +55,9 @@ void ExG4EventAction::EndOfEventAction(const G4Event* event)
   G4HCofThisEvent* hce = event->GetHCofThisEvent();
   if(!hce)
   {
-    G4ExceptionDescription msg;
-    msg << "No hits collection of this event found. \n";
-    G4Exception("ExG4EventAction::EndOfEventAction()","ExG4Cod001",JustWarning,msg);
+    //G4ExceptionDescription msg;
+    //msg << "No hits collection of this event found. \n";
+    //G4Exception("ExG4EventAction::EndOfEventAction()","ExG4Cod001",JustWarning,msg);
     return;
   }
 
@@ -67,27 +67,27 @@ void ExG4EventAction::EndOfEventAction(const G4Event* event)
   ExG4HitsCollection* dHC3 = static_cast<ExG4HitsCollection*>(hce->GetHC(fDHC3ID));//按照fDHC3ID从hce中取出一个HitsCollection，称为dHC3
   ExG4HitsCollection* dHC4 = static_cast<ExG4HitsCollection*>(hce->GetHC(fDHC4ID));//按照fDHC4ID从hce中取出一个HitsCollection，称为dHC4
 
-//   if(!dHC1)
-//   {
-//     G4ExceptionDescription msg;
-//     msg << " Some of hits collection of this event not found!. \n";
-//     G4Exception("ExG4EventAction::EndOfEventAction()","ExG4Code001",JustWarning,msg);
-//     return;
-//   }
+   //if(!dHC1)
+   //{
+   //  G4ExceptionDescription msg;
+   //  msg << " Some of hits collection of this event not found!. \n";
+   //  G4Exception("ExG4EventAction::EndOfEventAction()","ExG4Code001",JustWarning,msg);
+   //  return;
+   //}
   ofstream outresultfile("out.txt",ios::app);//定义输出文件流对象outbeamfile，以追加方式打开磁盘文件. by event
   G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
 
   //EMG response function
-  TF1 *EMGf1=new TF1("EMGf1","[0]*[3]/[1]*1.253314137*TMath::Exp(0.5*([3]*[3]/[1]/[1])+(x-[2])/[1])*TMath::Erfc(1/1.41421356*([3]/[1]+(x-[2])/[3]))",0,8000);//Glassman_PRC2019
-  EMGf1->SetNpx(80000);//Set the number of points used to draw the function. [0]-N, [1]-τ, [2]-μ, [3]-σ,
+  TF1 *EMGf1=new TF1("EMGf1","[0]*[3]/[1]*1.253314137*TMath::Exp(0.5*([3]*[3]/[1]/[1])+(x-[2])/[1])*TMath::Erfc(1/1.41421356*([3]/[1]+(x-[2])/[3]))",0,10000);//Glassman_PRC2019
+  EMGf1->SetNpx(100000);//Set the number of points used to draw the function. [0]-N, [1]-τ, [2]-μ, [3]-σ,
   // normalized cumulative Probability Density Function
-  TF1 *EMGf2=new TF1("EMGf2","[0]/2*(TMath::Exp((0.5*[3]*[3]-[1]*[2]+[1]*x)/([1]*[1]))*TMath::Erfc(1/1.41421356*([3]/[1]+(x-[2])/[3]))-TMath::Erfc((x-[2])/(1.41421356*[3])))+1",0,8000);//Glassman_PRC2019
-  EMGf2->SetNpx(80000);//Set the number of points used to draw the function.
+  TF1 *EMGf2=new TF1("EMGf2","[0]/2*(TMath::Exp((0.5*[3]*[3]-[1]*[2]+[1]*x)/([1]*[1]))*TMath::Erfc(1/1.41421356*([3]/[1]+(x-[2])/[3]))-TMath::Erfc((x-[2])/(1.41421356*[3])))+1",0,10000);//Glassman_PRC2019
+  EMGf2->SetNpx(100000);//Set the number of points used to draw the function.
 
-  emg_sigp1= 0.00011508152;
-  emg_sigp0= 1.142295;
-  emg_taup1= 0.000823321;
-  emg_taup0= -0.354105;
+  emg_sigp1 = 0.00011508152;
+  emg_sigp0 = 1.142295;
+  emg_taup1 = 0.000823321;
+  emg_taup0 = -0.354105;
 
   if(dHC1)//For DSSD1
   {
@@ -279,7 +279,7 @@ void ExG4EventAction::EndOfEventAction(const G4Event* event)
   {
 	  G4int n_hits=dHC4->entries();//CloverSD hit 数
 	  //G4cout<<"-----DSSD4---"<<"dHC4 n_hits="<<n_hits<<G4endl;
-	  analysisManager->FillH1(2,n_hits);//h1 ID=2, distribution of the number of hits
+	  //analysisManager->FillH1(2,n_hits);//h1 ID=2, distribution of the number of hits
 	  totalEmHit=0;	totalEmE=0;	ih=-100;	jh=-100; tof=-999; length=0; velocity=0;
 	  memset(px,0,sizeof(px));
 	  memset(py,0,sizeof(py));
@@ -307,17 +307,17 @@ void ExG4EventAction::EndOfEventAction(const G4Event* event)
 	  }
 	  //Outside the loop, the nt are filled by event, so the number of "nt>0" is exactly the event number!
 	  analysisManager->FillNtupleIColumn(18,dHC4->entries());//nt ID=18
-	  if(totalEmE>1000*CLHEP::keV)
+	  if(totalEmE>1000*CLHEP::keV)// if you comment this part out, the EMG effect will be disabled.
 	  {
 		  emg_sig = emg_sigp1*totalEmE*1000 + emg_sigp0;
 		  emg_tau = emg_taup1*totalEmE*1000 + emg_taup0;
-		  //G4cout<<"Q1_totalEmHit=	"<<totalEmHit<<"	totalEmE=	"<<totalEmE<<"	"<<totalEmE/CLHEP::keV<<G4endl;
+		  //G4cout<<"totalEmHit=	"<<totalEmHit<<"	totalEmE=	"<<totalEmE/CLHEP::keV<<"	emg_sig=	"<<emg_sig<<"	emg_tau=	"<<emg_tau<<G4endl;
 		  EMGf2->SetParameter(0,1.);//N
 		  EMGf2->SetParameter(1,emg_tau);//τ
 		  EMGf2->SetParameter(2,totalEmE*1000);//μ
 		  EMGf2->SetParameter(3,emg_sig);//σ
-		  totalEmE = EMGf2->GetX(G4RandFlat::shoot(0.0,1.0), 0,8000)/1000.0;//After this, totalEmE is the experimentally detected gamma energy in default units of MeV
-		  //totalEmE = EMGf2->GetX(G4UniformRand(), 0,8000)/1000.0;//After this, totalEmE is the experimentally detected gamma energy in default units of MeV
+		  totalEmE = EMGf2->GetX(G4RandFlat::shoot(0.0,1.0), 0,10000)/1000.0;//After this, totalEmE is the experimentally detected gamma energy in default units of MeV
+		  //totalEmE = EMGf2->GetX(G4UniformRand(), 0,10000)/1000.0;//After this, totalEmE is the experimentally detected gamma energy in default units of MeV
 		  // Without "/1000.0", it puts the value in units of keV in a variable in units of MeV, which is wrong.
 		  //G4double Etemp=totalEmE;
 		  //totalEmE=G4RandGauss::shoot(Etemp,TargetReso*Etemp);//G4RandGauss::shoot(μ,σ)

@@ -151,8 +151,8 @@ void PhysListEmStandard::ConstructProcess()
 
       ph->RegisterProcess(new G4hMultipleScattering(), particle);          
       G4ionIonisation* ionIoni = new G4ionIonisation();
-      ionIoni->SetEmModel(new G4IonParametrisedLossModel());
-      ionIoni->SetStepFunction(0.1, 1*um);//modify cut range for secondaries production, final range for the last step of ions. It seems that there is no difference for different parameters if below 0.0001*um.
+      ionIoni->SetEmModel(new G4IonParametrisedLossModel());// By default ICRU 73 stopping power tables are loaded
+      ionIoni->SetStepFunction(0.1, 0.001*um);//modify cut range for secondaries production, final range for the last step of ions. It seems that there is no difference for different parameters if below 0.0001*um.
       ph->RegisterProcess(ionIoni, particle);
       ph->RegisterProcess(new G4NuclearStopping(), particle);                   
       
