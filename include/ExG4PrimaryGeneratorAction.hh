@@ -67,6 +67,7 @@ private:
 // 	TH1F *py_impl;
 //     TH1D *pz_impl;// TH1F *pz = new TH1F("pz","pz",4000,0,4000); The whole sentence cannot be written in .hh
 	TF2 *xygaus; // 2D Gaussian beam spot
+	TF1 *ad;
 	double theta_beam, r_beam, Rmax; // 2D Uniform beam spot
 	double x0,y0,z0; // 2D beam spot	
 	double Eg_lit[100];
@@ -76,6 +77,7 @@ private:
 	double branch_lit_integ[100];
 	double branch_lit_tot;
 	int numpeaks;
+
 
 	G4double Qvalue;
 	G4double atomic_mass_unit; // 931.5 MeV/c2
