@@ -1,0 +1,277 @@
+root@ubuntu:/home/sun/app/HPGe_DSL-build# ./tele
+
+*************************************************************
+ Geant4 version Name: geant4-10-02-patch-03 [MT]   (27-January-2017)
+                      Copyright : Geant4 Collaboration
+                      Reference : NIM A 506 (2003), 250-303
+                            WWW : http://cern.ch/geant4
+*************************************************************
+
+Warning in <TClass::Init>: no dictionary for class TVirtualPaveStats is available
+1$ before run, by run, ExG4PrimaryGeneratorAction::ExG4PrimaryGeneratorAction()
+2$ before run, by run, ExG4RunAction::ExG4RunAction() Using Root
+3$ before run, by run, ExG4EventAction::ExG4EventAction()
+Visualization Manager instantiating with verbosity "warnings (3)"...
+Visualization Manager initialising...
+Registering graphics systems...
+
+You have successfully registered the following graphics systems.
+Current available graphics systems are:
+ASCIITree (ATree)
+DAWNFILE (DAWNFILE)
+G4HepRep (HepRepXML)
+G4HepRepFile (HepRepFile)
+RayTracer (RayTracer)
+VRML1FILE (VRML1FILE)
+VRML2FILE (VRML2FILE)
+gMocrenFile (gMocrenFile)
+OpenGLImmediateQt (OGLIQt, OGLI)
+OpenGLStoredQt (OGLSQt, OGL, OGLS)
+OpenGLImmediateXm (OGLIXm, OGLIQt_FALLBACK)
+OpenGLStoredXm (OGLSXm, OGLSQt_FALLBACK)
+OpenGLImmediateX (OGLIX, OGLIQt_FALLBACK, OGLIXm_FALLBACK)
+OpenGLStoredX (OGLSX, OGLSQt_FALLBACK, OGLSXm_FALLBACK)
+RayTracerX (RayTracerX)
+
+Registering model factories...
+
+You have successfully registered the following model factories.
+Registered model factories:
+  generic
+  drawByCharge
+  drawByParticleID
+  drawByOriginVolume
+  drawByAttribute
+
+Registered filter factories:
+  chargeFilter
+  particleFilter
+  originVolumeFilter
+  attributeFilter
+
+You have successfully registered the following user vis actions.
+Run Duration User Vis Actions: none
+End of Event User Vis Actions: none
+End of Run User Vis Actions: none
+
+Some /vis commands (optionally) take a string to specify colour.
+Available colours:
+  black, blue, brown, cyan, gray, green, grey, magenta, red, white, yellow
+
+4(HC-1)$ before run, by run and SD, ExG4SD::ExG4SD(G4String name)
+4(HC-1)$ before run, by run and SD, ExG4SD::ExG4SD(G4String name)
+4(HC-1)$ before run, by run and SD, ExG4SD::ExG4SD(G4String name)
+4(HC-1)$ before run, by run and SD, ExG4SD::ExG4SD(G4String name)
+G4ParticleDefintion (other than ions and shortlived) should be created in Pre_Init state  anti_proton
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : PART101
+      issued by : G4ParticleDefintion::G4ParticleDefintion
+G4ParticleDefinition should be created in PreInit state
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+G4ParticleDefintion (other than ions and shortlived) should be created in Pre_Init state  kaon-
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : PART101
+      issued by : G4ParticleDefintion::G4ParticleDefintion
+G4ParticleDefinition should be created in PreInit state
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+phot:   for  gamma    SubType= 12  BuildTable= 0
+      LambdaPrime table from 200 keV to 10 TeV in 54 bins 
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+       PhotoElectric :  Emin=        0 eV    Emax=       10 TeV   AngularGenSauterGavrila
+
+compt:   for  gamma    SubType= 13  BuildTable= 1
+      Lambda table from 100 eV  to 1 MeV, 7 bins per decade, spline: 1
+      LambdaPrime table from 1 MeV to 10 TeV in 49 bins 
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+        KleinNishina :  Emin=        0 eV    Emax=       10 TeV
+
+conv:   for  gamma    SubType= 14  BuildTable= 1
+      Lambda table from 1.022 MeV to 10 TeV, 20 bins per decade, spline: 1
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+        BetheHeitler :  Emin=        0 eV    Emax=       80 GeV
+     BetheHeitlerLPM :  Emin=       80 GeV   Emax=       10 TeV
+
+msc:   for e-    SubType= 10
+      RangeFactor= 0.04, stepLimitType: 1, latDisplacement: 1
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+            UrbanMsc :  Emin=        0 eV    Emax=       10 TeV  Table with 77 bins Emin=    100 eV    Emax=     10 TeV
+
+eIoni:   for  e-    SubType= 2
+      dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
+      Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
+      finalRange(mm)= 0.1, dRoverRange= 0.1, integral: 1, fluct: 1, linLossLimit= 0.01
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+        MollerBhabha :  Emin=        0 eV    Emax=       10 TeV
+
+eBrem:   for  e-    SubType= 3
+      dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
+      Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
+      LPM flag: 1 for E > 1 GeV,  HighEnergyThreshold(GeV)= 10000
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+             eBremSB :  Emin=        0 eV    Emax=        1 GeV   DipBustGen
+            eBremLPM :  Emin=        1 GeV   Emax=       10 TeV   DipBustGen
+
+msc:   for e+    SubType= 10
+      RangeFactor= 0.04, stepLimitType: 1, latDisplacement: 1
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+            UrbanMsc :  Emin=        0 eV    Emax=       10 TeV  Table with 77 bins Emin=    100 eV    Emax=     10 TeV
+
+eIoni:   for  e+    SubType= 2
+      dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
+      Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
+      finalRange(mm)= 0.1, dRoverRange= 0.1, integral: 1, fluct: 1, linLossLimit= 0.01
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+        MollerBhabha :  Emin=        0 eV    Emax=       10 TeV
+
+eBrem:   for  e+    SubType= 3
+      dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
+      Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
+      LPM flag: 1 for E > 1 GeV,  HighEnergyThreshold(GeV)= 10000
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+             eBremSB :  Emin=        0 eV    Emax=        1 GeV   DipBustGen
+            eBremLPM :  Emin=        1 GeV   Emax=       10 TeV   DipBustGen
+
+annihil:   for  e+, integral: 1     SubType= 5  BuildTable= 0
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+            eplus2gg :  Emin=        0 eV    Emax=       10 TeV
+
+msc:   for proton    SubType= 10
+      RangeFactor= 0.2, stepLimitType: 0, latDisplacement: 0
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+            UrbanMsc :  Emin=        0 eV    Emax=       10 TeV  Table with 77 bins Emin=    100 eV    Emax=     10 TeV
+
+hIoni:   for  proton    SubType= 2
+      dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
+      Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
+      finalRange(mm)= 0.001, dRoverRange= 0.1, integral: 1, fluct: 1, linLossLimit= 0.01
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+               Bragg :  Emin=        0 eV    Emax=        2 MeV
+          BetheBloch :  Emin=        2 MeV   Emax=       10 TeV
+
+hBrems:   for  proton    SubType= 3
+      dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
+      Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+               hBrem :  Emin=        0 eV    Emax=       10 TeV
+
+hPairProd:   for  proton    SubType= 4
+      dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
+      Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
+      Sampling table 13x1001; from 7.50618 GeV to 10 TeV 
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+           hPairProd :  Emin=        0 eV    Emax=       10 TeV
+
+msc:   for GenericIon    SubType= 10
+      RangeFactor= 0.2, stepLimitType: 0, latDisplacement: 0
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+            UrbanMsc :  Emin=        0 eV    Emax=       10 TeV
+
+ionIoni:   for  GenericIon    SubType= 2
+      dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
+      Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
+      finalRange(mm)= 1e-06, dRoverRange= 0.1, integral: 1, fluct: 1, linLossLimit= 0.02
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+         ParamICRU73 :  Emin=        0 eV    Emax=       10 TeV   deltaVI
+
+nuclearStopping:   for  GenericIon    SubType= 8  BuildTable= 0
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+   ICRU49NucStopping :  Emin=        0 eV    Emax=       10 TeV
+
+### ===  Deexcitation model UAtomDeexcitation is activated for 1 region:
+          DefaultRegionForTheWorld
+
+msc:   for alpha    SubType= 10
+      RangeFactor= 0.2, stepLimitType: 0, latDisplacement: 0
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+            UrbanMsc :  Emin=        0 eV    Emax=       10 TeV  Table with 77 bins Emin=    100 eV    Emax=     10 TeV
+
+ionIoni:   for  alpha    SubType= 2
+      dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
+      Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
+      finalRange(mm)= 0.001, dRoverRange= 0.1, integral: 1, fluct: 1, linLossLimit= 0.02
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+            BraggIon :  Emin=        0 eV    Emax=   7.9452 MeV
+          BetheBloch :  Emin=   7.9452 MeV   Emax=       10 TeV
+
+nuclearStopping:   for  alpha    SubType= 8  BuildTable= 0
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+   ICRU49NucStopping :  Emin=        0 eV    Emax=       10 TeV
+#### G4VUserPhysicsList::BuildPhysicsTable() - BuildPhysicsTable(anti_proton) skipped...
+#### G4VUserPhysicsList::BuildPhysicsTable() - BuildPhysicsTable(kaon-) skipped...
+### Run 0 starts.
+... open Root analysis file : Em/ExG4_Em.root - done
+5$ first in run, by run, ExG4RunAction::BeginOfRunAction(const G4Run*)
+--> Event 0 starts.
+--> Event 1 starts.
+--> Event 2 starts.
+--> Event 3 starts.
+--> Event 4 starts.
+--> Event 5 starts.
+--> Event 6 starts.
+--> Event 7 starts.
+--> Event 8 starts.
+--> Event 9 starts.
+--> Event 10 starts.
+--> Event 11 starts.
+--> Event 12 starts.
+--> Event 13 starts.
+--> Event 14 starts.
+--> Event 15 starts.
+--> Event 16 starts.
+--> Event 17 starts.
+--> Event 18 starts.
+--> Event 19 starts.
+--> Event 20 starts.
+--> Event 21 starts.
+--> Event 22 starts.
+--> Event 23 starts.
+--> Event 24 starts.
+--> Event 25 starts.
+--> Event 26 starts.
+--> Event 27 starts.
+--> Event 28 starts.
+--> Event 29 starts.
+--> Event 30 starts.
+--> Event 31 starts.
+--> Event 32 starts.
+--> Event 33 starts.
+--> Event 34 starts.
+--> Event 35 starts.
+--> Event 36 starts.
+--> Event 37 starts.
+--> Event 38 starts.
+--> Event 39 starts.
+--> Event 40 starts.
+--> Event 41 starts.
+--> Event 42 starts.
+--> Event 43 starts.
+--> Event 44 starts.
+--> Event 45 starts.
+--> Event 46 starts.
+--> Event 47 starts.
+--> Event 48 starts.
+--> Event 49 starts.
+... write Root file : Em/ExG4_Em.root - done
+6$ last in run, by run, ExG4RunAction::EndOfRunAction(const G4Run*)
+WARNING: G4VisManager::IsValidView(): Attempt to draw when no graphics system
+  has been instantiated.  Use "/vis/open" or "/vis/sceneHandler/create".
+  Alternatively, to avoid this message, suppress instantiation of vis
+  manager (G4VisExecutive), possibly by setting G4VIS_NONE, and ensure
+  drawing code is executed only if G4VVisManager::GetConcreteInstance()
+  is non-zero.
+Graphics systems deleted.
+Visualization Manager deleting...
+7$ after run, by run,ExG4RunAction::~ExG4RunAction()
+8$ after run, by run, ExG4PrimaryGeneratorAction::~ExG4PrimaryGeneratorAction()
+9(HC0)$ after run, by run and SD ExG4SD::~ExG4SD()
+9(HC1)$ after run, by run and SD ExG4SD::~ExG4SD()
+9(HC2)$ after run, by run and SD ExG4SD::~ExG4SD()
+9(HC3)$ after run, by run and SD ExG4SD::~ExG4SD()
+10$ after run, by run, ExG4EventAction::~ExG4EventAction()
