@@ -25,3 +25,24 @@ gcc version 9.4.0
 
 As of 20240515,
 23Mg Ex=7336; DSSD 75um; Tau=5
+
+source /usr/opt/jessie.sh
+source /etc/profile.d/module.sh
+lsb_release -a
+Distributor ID:	Debian
+Description:	Debian GNU/Linux 8.11 (jessie)
+Release:	8.11
+Codename:	jessie
+module avail
+gcc -v
+4.9.2
+root-config --version
+6.06.02
+cmake --version
+3.6.3
+
+godsl2
+cd 
+rm -rf CM*; rm -rf cm*
+cmake -DGeant4_DIR=/mnt/simulations/proton_detector/Geant4/geant4.10.2-install/lib/Geant4-10.2.2 /mnt/analysis/triumf_s2193/sun/Geant4_DSL_Jul2024
+
