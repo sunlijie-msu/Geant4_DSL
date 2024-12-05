@@ -299,7 +299,7 @@ void ExG4PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	Atarget = 3; Zrecoil = 12; Arecoil = 23; Zejectile = 2; Aejectile = 4;
 	Qvalue = 4.05 * CLHEP::MeV; // gs Q-value
 	// 	Excitation_recoil=451*CLHEP::keV; tau=1659; //half-life in fs // 23Mg
-	Excitation_recoil = 7336 * CLHEP::keV; tau = 5; //half-life in fs // 23Mg 7787
+	Excitation_recoil = 7787 * CLHEP::keV; tau = 1; //half-life in fs // 23Mg 7787
 
 	// 31S + 4He
 //  	Atarget=3; Zrecoil=16; Arecoil=31; Zejectile=2; Aejectile=4;
@@ -327,8 +327,8 @@ void ExG4PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 //	Excitation_recoil = 6391.7431*CLHEP::keV; // E middle an annoying mean-max correction in EMG function
 //	Excitation_recoil = 6392.0531*CLHEP::keV; // E high an annoying mean-max correction in EMG function
 	//	Excitation_recoil=4157*CLHEP::keV; // use this if it's on fishtank
-	//	Excitation_recoil = 7789 * CLHEP::keV; // use this if it's on VMware
-		Excitation_recoil=7338*CLHEP::keV; // use this if it's on fishtank
+		Excitation_recoil = 7789 * CLHEP::keV; // use this if it's on VMware
+	//	Excitation_recoil=7338*CLHEP::keV; // use this if it's on fishtank
 		
 	int AngularDistribution = 0;
 	if (AngularDistribution == 1) // slower than AD = 0

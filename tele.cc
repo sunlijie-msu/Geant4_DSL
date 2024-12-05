@@ -47,7 +47,7 @@ int main(int argc,char** argv)
 	{
 		for(int runid=0;runid<1;runid++)
 		{
-			runManager->BeamOn(50);//1 million consumes 15G memory
+			runManager->BeamOn(200000);//1 million consumes 15G memory
 		}
 	}
 	else

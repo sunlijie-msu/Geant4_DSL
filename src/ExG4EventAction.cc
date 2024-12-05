@@ -84,10 +84,17 @@ void ExG4EventAction::EndOfEventAction(const G4Event* event)
   TF1 *EMGf2=new TF1("EMGf2","[0]/2*(TMath::Exp((0.5*[3]*[3]-[1]*[2]+[1]*x)/([1]*[1]))*TMath::Erfc(1/1.41421356*([3]/[1]+(x-[2])/[3]))-TMath::Erfc((x-[2])/(1.41421356*[3])))+1",0,10000);//Glassman_PRC2019
   EMGf2->SetNpx(100000);//Set the number of points used to draw the function.
 
-  emg_sigp1 = 0.00011508152;
-  emg_sigp0 = 1.142295;
-  emg_taup1 = 0.000823321;
-  emg_taup0 = -0.354105;
+  /*S1582*/
+//   emg_sigp1 = 0.00011508152;
+//   emg_sigp0 = 1.142295;
+//   emg_taup1 = 0.000823321;
+//   emg_taup0 = -0.354105;
+
+  /*S2193*/
+  emg_sigp1 = 0.00023374872;
+  emg_sigp0 = 1.0980898;
+  emg_taup1 = 0.00099374058;
+  emg_taup0 = 0.2415253;
 
   if(dHC1)//For DSSD1
   {
@@ -307,10 +314,10 @@ void ExG4EventAction::EndOfEventAction(const G4Event* event)
 	  }
 	  //Outside the loop, the nt are filled by event, so the number of "nt>0" is exactly the event number!
 	  analysisManager->FillNtupleIColumn(18,dHC4->entries());//nt ID=18
-	  if(totalEmE>1000*CLHEP::keV)// if you comment this part out, the EMG effect will be disabled.
+	  if(totalEmE>400*CLHEP::keV)// if you comment this part out, the EMG effect will be disabled.
 	  {
 		  emg_sig = emg_sigp1*totalEmE*1000 + emg_sigp0;
-		  emg_tau = emg_taup1*totalEmE*1000 + emg_taup0;
+		  emg_tau = emg_taup1 * totalEmE * 1000 + emg_taup0;// +0.65;
 		  //G4cout<<"totalEmHit=	"<<totalEmHit<<"	totalEmE=	"<<totalEmE/CLHEP::keV<<"	emg_sig=	"<<emg_sig<<"	emg_tau=	"<<emg_tau<<G4endl;
 		  EMGf2->SetParameter(0,1.);//N
 		  EMGf2->SetParameter(1,emg_tau);//¦Ó

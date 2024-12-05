@@ -1,7 +1,7 @@
 DSL1 and DSL2 simulation
 VMware can use these files.
 
-cdd
+godsl
 cd /home/sun/app/Geant4_DSL-build
 
 1) cmd
@@ -23,8 +23,9 @@ ROOT version 6.06.08
 cmake version 3.16.3
 gcc version 9.4.0
 
-As of 20240515,
-23Mg Ex=7336; DSSD 75um; Tau=5
+Update 20241204,
+EMG response function updated to S2193;
+23Mg Ex=7336; DSSD 75um; Tau=1
 
 source /usr/opt/jessie.sh
 source /etc/profile.d/module.sh
