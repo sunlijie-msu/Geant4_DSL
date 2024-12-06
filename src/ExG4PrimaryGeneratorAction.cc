@@ -297,7 +297,7 @@ void ExG4PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
 		// 23Mg + 4He
 	Atarget = 3; Zrecoil = 12; Arecoil = 23; Zejectile = 2; Aejectile = 4;
-	Qvalue = 4.05 * CLHEP::MeV; // gs Q-value
+	Qvalue = 4.0464 * CLHEP::MeV; // gs Q-value
 	// 	Excitation_recoil=451*CLHEP::keV; tau=1659; //half-life in fs // 23Mg
 	Excitation_recoil = 7787 * CLHEP::keV; tau = 1; //half-life in fs // 23Mg 7787
 
