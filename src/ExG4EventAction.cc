@@ -91,10 +91,10 @@ void ExG4EventAction::EndOfEventAction(const G4Event* event)
 //   emg_taup0 = -0.354105;
 
   /*S2193*/
-  emg_sigp1 = 0.00023374872;
-  emg_sigp0 = 1.0980898;
-  emg_taup1 = 0.00099374058;
-  emg_taup0 = 0.2415253;
+  emg_sigp1 = 0.0002337282;
+  emg_sigp0 = 1.0978361;
+  emg_taup1 = 0.000993541;
+  emg_taup0 = 0.2405206;
 
   if(dHC1)//For DSSD1
   {
