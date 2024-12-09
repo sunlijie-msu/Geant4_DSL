@@ -59,7 +59,14 @@ private:
 	G4VPhysicalVolume* physiDSSD2_Metal_Back;
 	G4VPhysicalVolume* physiDetectorMount;
 	G4VPhysicalVolume* physiDetectorSupport;
-	G4VPhysicalVolume* physiTarget;
+	G4VPhysicalVolume* physiAu_Layer;
+	G4VPhysicalVolume* physiHe_Layer1;
+	G4VPhysicalVolume* physiHe_Layer2;
+	G4VPhysicalVolume* physiHe_Layer3;
+	G4VPhysicalVolume* physiHe_Layer4;
+	G4VPhysicalVolume* physiHe_Layer5;
+	G4VPhysicalVolume* physiHe_Layer6;
+	G4VPhysicalVolume* physiHe_Layer7;
 	G4VPhysicalVolume* physiClover;
 	G4VPhysicalVolume* physiCollimator;
 	G4VPhysicalVolume* physiChamber;
@@ -81,7 +88,14 @@ private:
 	G4LogicalVolume* logicDSSD2_Metal_Back;
 	G4LogicalVolume* logicDetectorMount;
 	G4LogicalVolume* logicDetectorSupport;
-	G4LogicalVolume* logicTarget;
+	G4LogicalVolume* logicAu_Layer;
+	G4LogicalVolume* logicHe_Layer1;
+	G4LogicalVolume* logicHe_Layer2;
+	G4LogicalVolume* logicHe_Layer3;
+	G4LogicalVolume* logicHe_Layer4;
+	G4LogicalVolume* logicHe_Layer5;
+	G4LogicalVolume* logicHe_Layer6;
+	G4LogicalVolume* logicHe_Layer7;
 	G4LogicalVolume* logicClover;
 	G4LogicalVolume* logicCollimator;
 	G4LogicalVolume* logicChamber;
@@ -95,6 +109,7 @@ private:
 	G4Element* Fe;
 	G4Element* Cr;
 	G4Element* Ni;
+	G4Element* Au;
 
 	G4Material* silicon;
 	G4Material* germanium;
@@ -121,6 +136,13 @@ private:
 	G4Material* FR4;
 	G4Material* PEEK;
 	G4Material* G10;
+	G4Material* low_density_Au1;
+	G4Material* low_density_Au2;
+	G4Material* low_density_Au3;
+	G4Material* low_density_Au4;
+	G4Material* low_density_Au5;
+	G4Material* low_density_Au6;
+	G4Material* low_density_Au7;
 
 	G4double density, temperature, pressure, PressureFactor;
 	G4int nel;

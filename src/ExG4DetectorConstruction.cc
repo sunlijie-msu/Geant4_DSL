@@ -17,7 +17,7 @@
 #include "G4VSensitiveDetector.hh"
 #include "G4ios.hh"
 
-ExG4DetectorConstruction::ExG4DetectorConstruction():G4VUserDetectorConstruction(),physiDSSD1(0),physiDSSD2(0),physiTarget(0),physiClover(0),physiCollimator(0),physiChamber(0),physiHousing(0),silicon(0),germanium(0),gold(0),iron(0),carbon(0),csi(0),vacuum(0)
+ExG4DetectorConstruction::ExG4DetectorConstruction() :G4VUserDetectorConstruction(), physiDSSD1(0), physiDSSD2(0), physiAu_Layer(0), physiHe_Layer1(0), physiHe_Layer2(0), physiHe_Layer3(0), physiHe_Layer4(0), physiHe_Layer5(0), physiClover(0), physiCollimator(0), physiChamber(0), physiHousing(0), silicon(0), germanium(0), gold(0), iron(0), carbon(0), csi(0), vacuum(0)
 {
 	Use_DSL=2; // DSL=1 or 2 is used.
 }
@@ -356,13 +356,54 @@ G4VPhysicalVolume* ExG4DetectorConstruction::Construct()
 
 
 	//Target DSL1/2 gold foil
-	G4VSolid* solidTarget
-		= new G4Box("solidTarget",15./2.*mm,15./2.*mm,0.025/2.*mm); //gold foil
-	logicTarget
-		= new G4LogicalVolume(solidTarget,gold,"logicTarget");
-	physiTarget
-		= new G4PVPlacement(0,G4ThreeVector(0,0,0.0125*mm),logicTarget,"physiTarget",logicWorld,false,0,checkOverlaps);
-	//In this simulation, (0,0,0) is placed at the upstream surface of the gold target
+	G4double TotalThickness = 0.02500 * mm;
+	G4double AuThickness = 0.02479 * mm;
+	G4double HeThickness = 0.00003 * mm; // 30 nm * 7 layers = 210 nm = 0.00021 mm
+
+	G4VSolid* solidHe_Layer1
+		= new G4Tubs("solidHe_Layer1", 0 * mm, 10.0 * mm, HeThickness / 2., 0. * deg, 360. * deg);
+	logicHe_Layer1 = new G4LogicalVolume(solidHe_Layer1, low_density_Au1, "logicHe_Layer1");
+	physiHe_Layer1 = new G4PVPlacement(0, G4ThreeVector(0, 0, HeThickness / 2.), logicHe_Layer1, "physiHe_Layer1", logicWorld, false, 0, checkOverlaps);
+
+	G4VSolid* solidHe_Layer2
+		= new G4Tubs("solidHe_Layer2", 0 * mm, 10.0 * mm, HeThickness / 2., 0. * deg, 360. * deg);
+	logicHe_Layer2 = new G4LogicalVolume(solidHe_Layer2, low_density_Au2, "logicHe_Layer2");
+	physiHe_Layer2 = new G4PVPlacement(0, G4ThreeVector(0, 0, HeThickness + HeThickness / 2.), logicHe_Layer2, "physiHe_Layer2", logicWorld, false, 0, checkOverlaps);
+
+	G4VSolid* solidHe_Layer3
+		= new G4Tubs("solidHe_Layer3", 0 * mm, 10.0 * mm, HeThickness / 2., 0. * deg, 360. * deg);
+	logicHe_Layer3 = new G4LogicalVolume(solidHe_Layer3, low_density_Au3, "logicHe_Layer3");
+	physiHe_Layer3 = new G4PVPlacement(0, G4ThreeVector(0, 0, HeThickness * 2 + HeThickness / 2.), logicHe_Layer3, "physiHe_Layer3", logicWorld, false, 0, checkOverlaps);
+
+	G4VSolid* solidHe_Layer4
+		= new G4Tubs("solidHe_Layer4", 0 * mm, 10.0 * mm, HeThickness / 2., 0. * deg, 360. * deg);
+	logicHe_Layer4 = new G4LogicalVolume(solidHe_Layer4, low_density_Au4, "logicHe_Layer4");
+	physiHe_Layer4 = new G4PVPlacement(0, G4ThreeVector(0, 0, HeThickness * 3 + HeThickness / 2.), logicHe_Layer4, "physiHe_Layer4", logicWorld, false, 0, checkOverlaps);
+
+	G4VSolid* solidHe_Layer5
+		= new G4Tubs("solidHe_Layer5", 0 * mm, 10.0 * mm, HeThickness / 2., 0. * deg, 360. * deg);
+	logicHe_Layer5 = new G4LogicalVolume(solidHe_Layer5, low_density_Au5, "logicHe_Layer5");
+	physiHe_Layer5 = new G4PVPlacement(0, G4ThreeVector(0, 0, HeThickness * 4 + HeThickness / 2.), logicHe_Layer5, "physiHe_Layer5", logicWorld, false, 0, checkOverlaps);
+
+	G4VSolid* solidHe_Layer6
+		= new G4Tubs("solidHe_Layer6", 0 * mm, 10.0 * mm, HeThickness / 2., 0. * deg, 360. * deg);
+	logicHe_Layer6 = new G4LogicalVolume(solidHe_Layer6, low_density_Au6, "logicHe_Layer6");
+	physiHe_Layer6 = new G4PVPlacement(0, G4ThreeVector(0, 0, HeThickness * 5 + HeThickness / 2.), logicHe_Layer6, "physiHe_Layer6", logicWorld, false, 0, checkOverlaps);
+
+	G4VSolid* solidHe_Layer7
+		= new G4Tubs("solidHe_Layer7", 0 * mm, 10.0 * mm, HeThickness / 2., 0. * deg, 360. * deg);
+	logicHe_Layer7 = new G4LogicalVolume(solidHe_Layer7, low_density_Au7, "logicHe_Layer7");
+	physiHe_Layer7 = new G4PVPlacement(0, G4ThreeVector(0, 0, HeThickness * 6 + HeThickness / 2.), logicHe_Layer7, "physiHe_Layer7", logicWorld, false, 0, checkOverlaps);
+
+	G4VSolid* solidAu_Layer
+		= new G4Tubs("solidAu_Layer", 0 * mm, 10.0 * mm, AuThickness / 2., 0. * deg, 360. * deg);
+	logicAu_Layer = new G4LogicalVolume(solidAu_Layer, gold, "logicAu_Layer");
+	physiAu_Layer = new G4PVPlacement(0, G4ThreeVector(0, 0, TotalThickness - AuThickness / 2.), logicAu_Layer, "physiAu_Layer", logicWorld, false, 0, checkOverlaps);
+
+	//In this simulation, (0,0,0) is placed at the upstream surface of the first He layer
+	//Each He layer is 40 nm thick (0.00004 mm) and placed sequentially so that five layers total 200 nm (0.0002 mm), followed by the Au layer starting right after the He layers at 0.0002 mm and extending to 0.0250 mm.
+
+
 
 	//GRIFFIN Clover Ge Detector
 	//make first crystal
@@ -624,7 +665,7 @@ G4VPhysicalVolume* ExG4DetectorConstruction::Construct()
 	logicDetectorMount->SetVisAttributes(DetectorVisAtt);
 
 	DetectorVisAtt = new G4VisAttributes(G4Colour::Yellow());
-	logicTarget->SetVisAttributes(DetectorVisAtt); //Gold foil
+	logicAu_Layer->SetVisAttributes(DetectorVisAtt); //Gold foil
 
 	DetectorVisAtt = new G4VisAttributes(G4Colour(1.,1.,0.,0.3));
 	DetectorVisAtt->SetForceWireframe(true); //optional
@@ -678,6 +719,30 @@ void ExG4DetectorConstruction::ConstructMaterials()
 	Fe = nistManager->FindOrBuildElement("Fe", isotopes);
 	Cr = nistManager->FindOrBuildElement("Cr", isotopes);
 	Ni = nistManager->FindOrBuildElement("Ni", isotopes);
+	Au = nistManager->FindOrBuildElement("Au", isotopes);
+
+	G4double density_pure_Au = 19.311 * g / cm3;
+	low_density_Au1 = new G4Material("low_density_Au1", 0.85* density_pure_Au, 1);
+	low_density_Au1->AddElement(Au, 1);
+
+	low_density_Au2 = new G4Material("low_density_Au2", 0.73* density_pure_Au, 1);
+	low_density_Au2->AddElement(Au, 1);
+
+	low_density_Au3 = new G4Material("low_density_Au3", 0.68 * density_pure_Au, 1);
+	low_density_Au3->AddElement(Au, 1);
+
+	low_density_Au4 = new G4Material("low_density_Au4", 0.72 * density_pure_Au, 1);
+	low_density_Au4->AddElement(Au, 1);
+
+	low_density_Au5 = new G4Material("low_density_Au5", 0.82 * density_pure_Au, 1);
+	low_density_Au5->AddElement(Au, 1);
+
+	low_density_Au6 = new G4Material("low_density_Au6", 0.94 * density_pure_Au, 1);
+	low_density_Au6->AddElement(Au, 1);
+
+	low_density_Au7 = new G4Material("low_density_Au7", 0.99 * density_pure_Au, 1);
+	low_density_Au7->AddElement(Au, 1);
+
 
 	germanium=nistManager->FindOrBuildMaterial("G4_Ge");
 	copper=nistManager->FindOrBuildMaterial("G4_Cu");
@@ -757,7 +822,7 @@ void ExG4DetectorConstruction::ConstructSDandField()
 
   G4VSensitiveDetector* TargetSD = new ExG4SD(SDname="/Target");//SensitiveDetectorName
   SDman->AddNewDetector(TargetSD);
-  logicTarget->SetSensitiveDetector(TargetSD);
+  logicAu_Layer->SetSensitiveDetector(TargetSD);
 
   G4VSensitiveDetector* CloverSD = new ExG4SD(SDname="/Clover");//SensitiveDetectorName
   SDman->AddNewDetector(CloverSD);

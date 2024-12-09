@@ -315,6 +315,7 @@ void ExG4PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
 	Excitation_ejectile = 0; // don't change
 	Qvalue = Qvalue - Excitation_recoil; // effective Q-value. don't change
+	// cout << Qvalue / CLHEP::MeV << G4endl;
 	tau = tau / 1000 * CLHEP::picosecond; // lifetime
 	//	cout<<tau/CLHEP::ns<<G4endl;
 	//	tau=1.442695*tau; // half-life to lifetime. useless but accidentally used for 1248.
@@ -327,8 +328,8 @@ void ExG4PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 //	Excitation_recoil = 6391.7431*CLHEP::keV; // E middle an annoying mean-max correction in EMG function
 //	Excitation_recoil = 6392.0531*CLHEP::keV; // E high an annoying mean-max correction in EMG function
 	//	Excitation_recoil=4157*CLHEP::keV; // use this if it's on fishtank
-		Excitation_recoil = 7789 * CLHEP::keV; // use this if it's on VMware
-	//	Excitation_recoil=7338*CLHEP::keV; // use this if it's on fishtank
+		Excitation_recoil = 7791 * CLHEP::keV; // use this if it's on VMware
+
 		
 	int AngularDistribution = 0;
 	if (AngularDistribution == 1) // slower than AD = 0
@@ -386,6 +387,7 @@ void ExG4PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	particle->SetPDGLifeTime(tau); // this is lifetime τ = 1.443*T1/2 // for Doppler
 
 	Erecoil = Ebeam + Qvalue - Eejectile; // Conservation of total energy. Get Erecoil from Eejectile.
+	//G4cout << "Erecoil=	" << Erecoil / CLHEP::MeV << "	MeV. " << "Eejectile=	" << Eejectile / CLHEP::MeV << "	MeV. " << G4endl;
 	Pejectile = sqrt((Eejectile / (Aejectile * atomic_mass_unit) + 1) * (Eejectile / (Aejectile * atomic_mass_unit) + 1) - 1) * (Aejectile * atomic_mass_unit); // momentum in units of MeV/c
 	Precoil = sqrt((Erecoil / (Arecoil * atomic_mass_unit) + 1) * (Erecoil / (Arecoil * atomic_mass_unit) + 1) - 1) * (Arecoil * atomic_mass_unit); // momentum in units of MeV/c
 	Pbeam = sqrt((Ebeam / (Abeam * atomic_mass_unit) + 1) * (Ebeam / (Abeam * atomic_mass_unit) + 1) - 1) * (Abeam * atomic_mass_unit); // momentum in units of MeV/c
