@@ -17,7 +17,7 @@
 #include "G4VSensitiveDetector.hh"
 #include "G4ios.hh"
 
-ExG4DetectorConstruction::ExG4DetectorConstruction() :G4VUserDetectorConstruction(), physiDSSD1(0), physiDSSD2(0), physiAu_Layer(0), physiHe_Layer1(0), physiHe_Layer2(0), physiHe_Layer3(0), physiHe_Layer4(0), physiHe_Layer5(0), physiClover(0), physiCollimator(0), physiChamber(0), physiHousing(0), silicon(0), germanium(0), gold(0), iron(0), carbon(0), csi(0), vacuum(0)
+ExG4DetectorConstruction::ExG4DetectorConstruction() :G4VUserDetectorConstruction(), physiDSSD1(0), physiDSSD2(0), physiAu_Layer(0), physiHe_Layer1(0), physiHe_Layer2(0), physiHe_Layer3(0), physiHe_Layer4(0), physiHe_Layer5(0), physiHe_Layer6(0), physiHe_Layer7(0), physiClover(0), physiCollimator(0), physiChamber(0), physiHousing(0), silicon(0), germanium(0), gold(0), iron(0), carbon(0), csi(0), vacuum(0)
 {
 	Use_DSL=2; // DSL=1 or 2 is used.
 }
@@ -355,7 +355,7 @@ G4VPhysicalVolume* ExG4DetectorConstruction::Construct()
 
 
 
-	//Target DSL1/2 gold foil
+	//Target DSL1/DSL2 gold foil
 	G4double TotalThickness = 0.02500 * mm;
 	G4double AuThickness = 0.02479 * mm;
 	G4double HeThickness = 0.00003 * mm; // 30 nm * 7 layers = 210 nm = 0.00021 mm
@@ -401,7 +401,7 @@ G4VPhysicalVolume* ExG4DetectorConstruction::Construct()
 	physiAu_Layer = new G4PVPlacement(0, G4ThreeVector(0, 0, TotalThickness - AuThickness / 2.), logicAu_Layer, "physiAu_Layer", logicWorld, false, 0, checkOverlaps);
 
 	//In this simulation, (0,0,0) is placed at the upstream surface of the first He layer
-	//Each He layer is 40 nm thick (0.00004 mm) and placed sequentially so that five layers total 200 nm (0.0002 mm), followed by the Au layer starting right after the He layers at 0.0002 mm and extending to 0.0250 mm.
+	//Each He layer is 30 nm thick (0.00003 mm) and placed sequentially so that seven layers total 210 nm (0.00021 mm), followed by the Au layer starting right after the He layers at 0.00021 mm and extending to 0.0250 mm.
 
 
 
@@ -722,10 +722,10 @@ void ExG4DetectorConstruction::ConstructMaterials()
 	Au = nistManager->FindOrBuildElement("Au", isotopes);
 
 	G4double density_pure_Au = 19.311 * g / cm3;
-	low_density_Au1 = new G4Material("low_density_Au1", 0.85* density_pure_Au, 1);
+	low_density_Au1 = new G4Material("low_density_Au1", 0.85 * density_pure_Au, 1);
 	low_density_Au1->AddElement(Au, 1);
 
-	low_density_Au2 = new G4Material("low_density_Au2", 0.73* density_pure_Au, 1);
+	low_density_Au2 = new G4Material("low_density_Au2", 0.73 * density_pure_Au, 1);
 	low_density_Au2->AddElement(Au, 1);
 
 	low_density_Au3 = new G4Material("low_density_Au3", 0.68 * density_pure_Au, 1);

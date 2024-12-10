@@ -121,7 +121,6 @@ void ExG4PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	z0 = depth_3He->GetRandom() * CLHEP::nm;//Return a random number distributed according the histogram depth_3He
 	// 	z0=gRandom->Gaus(4.600,0.420)*CLHEP::um; // test for Nick's target implanted at LLNL
 	// 	if(z0<0) z0=0; // test for Nick's target implanted at LLNL
-	//	z0=0.5*CLHEP::um;
 	//G4cout<<"++++++++++++  x0="<<x0/CLHEP::mm<<"  y0="<<y0/CLHEP::mm<<"  z0="<<z0/CLHEP::nm<<G4endl;
 
 		//py_impl=(TH1F*)pFile->Get("himpl40py");//Get("hy2");//from implantation root for DSSD2
@@ -299,7 +298,7 @@ void ExG4PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	Atarget = 3; Zrecoil = 12; Arecoil = 23; Zejectile = 2; Aejectile = 4;
 	Qvalue = 4.0464 * CLHEP::MeV; // gs Q-value
 	// 	Excitation_recoil=451*CLHEP::keV; tau=1659; //half-life in fs // 23Mg
-	Excitation_recoil = 7787 * CLHEP::keV; tau = 1; //half-life in fs // 23Mg 7787
+	Excitation_recoil = 7787 * CLHEP::keV; tau = 10; //half-life in fs // true Ex for Q value calculation
 
 	// 31S + 4He
 //  	Atarget=3; Zrecoil=16; Arecoil=31; Zejectile=2; Aejectile=4;
@@ -328,7 +327,7 @@ void ExG4PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 //	Excitation_recoil = 6391.7431*CLHEP::keV; // E middle an annoying mean-max correction in EMG function
 //	Excitation_recoil = 6392.0531*CLHEP::keV; // E high an annoying mean-max correction in EMG function
 	//	Excitation_recoil=4157*CLHEP::keV; // use this if it's on fishtank
-		Excitation_recoil = 7791 * CLHEP::keV; // use this if it's on VMware
+		Excitation_recoil = 7340 * CLHEP::keV; // use this if it's on VMware
 
 		
 	int AngularDistribution = 0;
@@ -364,7 +363,8 @@ void ExG4PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	position = G4ThreeVector(x0 * CLHEP::mm, y0 * CLHEP::mm, z0 * CLHEP::mm);// 2D beam spot
 	//position=G4ThreeVector(0.*CLHEP::mm,0.*CLHEP::mm,0*CLHEP::mm);// point source, usually for check, validation and test
 	momentumDirection = G4ThreeVector(dirx, diry, dirz);//isotropy
-	//momentumDirection = G4ThreeVector(0,0,-1);//(0,0,+1) unidirectional toward Z+ axis, usually for check, validation and test
+	//momentumDirection = G4ThreeVector(0,0,+1);//(0,0,+1) unidirectional toward Z+ axis, usually for check, validation and test
+	//Eejectile = 20 * CLHEP::MeV; // fixed energy for test
 	fParticleGun->SetParticleDefinition(particle);
 	fParticleGun->SetParticleEnergy(Eejectile);
 	fParticleGun->SetParticlePosition(position);
@@ -411,7 +411,8 @@ void ExG4PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	//position=G4ThreeVector(x0*CLHEP::mm,y0*CLHEP::mm,z0*CLHEP::mm);// 2D beam spot
 	//position=G4ThreeVector(0.*CLHEP::mm,0.*CLHEP::mm,0.*CLHEP::mm);// point source, usually for check, validation and test
 	momentumDirection = G4ThreeVector(dirx, diry, dirz);//isotropy
-	//momentumDirection = G4ThreeVector(0,0,-1);//(0,0,+1) unidirectional toward Z+ axis, usually for check, validation and test
+	//momentumDirection = G4ThreeVector(0,0,+1);//(0,0,+1) unidirectional toward Z+ axis, usually for check, validation and test
+	//Erecoil = 50 * CLHEP::MeV; // for test
 	fParticleGun->SetParticleDefinition(particle);
 	fParticleGun->SetParticleEnergy(Erecoil);
 	fParticleGun->SetParticlePosition(position);//recoil uses the same position as projectile

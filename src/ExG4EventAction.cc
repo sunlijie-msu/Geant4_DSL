@@ -234,7 +234,7 @@ void ExG4EventAction::EndOfEventAction(const G4Event* event)
 	  memset(t,0,sizeof(t));//time stamp of each step point
 	  for(G4int i=0;i<n_hits;i++)//Within this loop, the histo are filled by hit, so the number can be much larger than the event number, the nt can only be filled by event (the last hit)
 	  {
-		  if(i>0) break; //using this statement to extract the first hit for position check, the energy would be incomplete cuz only the first hit was recorded.
+		  //if(i>0) break; //using this statement to extract the first hit for position check, the energy would be incomplete cuz only the first hit was recorded.
 		  ExG4Hit* hit = (*dHC3)[i];//fHitsCollection中第i个hit的信息，有时一个event就产生1个hit，但打出次级粒子会有多个hit
 		  // hit->Print();
 		  tof = hit->GetTof();
@@ -252,19 +252,19 @@ void ExG4EventAction::EndOfEventAction(const G4Event* event)
 		  py[i]=globalPos.y();
 		  pz[i]=globalPos.z();
 		  t[i]=tof;
-		  if(i==0)
-		  {
-			  dt[i]=t[i];
-			  dx[i]=sqrt(px[i]*px[i] + py[i]*py[i] + pz[i]*pz[i]);
-		  }
-		  if(i>0&&i<300)
-		  {
-			  dt[i]=t[i]-t[i-1];
-			  dx[i]=sqrt((px[i]-px[i-1])*(px[i]-px[i-1]) + (py[i]-py[i-1])*(py[i]-py[i-1]) + (pz[i]-pz[i-1])*(pz[i]-pz[i-1]));
-		  }
-		  length+=dx[i];
-		  velocity=dx[i]/dt[i];
-		  //outresultfile<<"D3_totalEmHit=	"<<totalEmHit<<"	totalEmE=	"<<totalEmE/CLHEP::keV<<"	keV	Er=	"<<111.11-totalEmE/CLHEP::keV<<"	keV	eDep=	"<<eDep/CLHEP::keV<<"	keV	tof=	"<<tof/CLHEP::ns<<"	ns	Pos.x=	"<<globalPos.x()/CLHEP::um<<"	um	Pos.y=	"<<globalPos.y()/CLHEP::um<<"	um	Pos.z=	"<<globalPos.z()/CLHEP::um<<"	um	dx=	"<<dx[i]/CLHEP::um<<"	um	dt=	"<<dt[i]/CLHEP::ns<<"	ns	v=	"<<velocity/CLHEP::m/ns<<"	m/ns	length=	"<<length/CLHEP::um<<"	um"<<G4endl;
+		  //if(i==0)
+		  //{
+			 // dt[i]=t[i];
+			 // dx[i]=sqrt(px[i]*px[i] + py[i]*py[i] + pz[i]*pz[i]);
+		  //}
+		  //if(i>0&&i<300)
+		  //{
+			 // dt[i]=t[i]-t[i-1];
+			 // dx[i]=sqrt((px[i]-px[i-1])*(px[i]-px[i-1]) + (py[i]-py[i-1])*(py[i]-py[i-1]) + (pz[i]-pz[i-1])*(pz[i]-pz[i-1]));
+		  //}
+		  //length+=dx[i];
+		  //velocity=dx[i]/dt[i];
+		  //G4cout<<"Target_totalEmHit=	"<<totalEmHit<<"	totalEmE=	"<<totalEmE/CLHEP::keV<<"	keV	Er=	"<<55000-totalEmE/CLHEP::keV<<"	keV	eDep=	"<<eDep/CLHEP::keV<<"	keV	tof=	"<<tof/CLHEP::ns<<"	ns	Pos.x=	"<<globalPos.x()/CLHEP::um<<"	um	Pos.y=	"<<globalPos.y()/CLHEP::um<<"	um	Pos.z=	"<<globalPos.z()/CLHEP::um<<"	um	dx=	"<<dx[i]/CLHEP::um<<"	um	dt=	"<<dt[i]/CLHEP::ns<<"	ns	v=	"<<velocity/CLHEP::m/ CLHEP::ns<<"	m/ns	length=	"<<length/CLHEP::um<<"	um"<<G4endl;
 	  }
 	  //Outside the loop, the nt are filled by event, so the number of "nt>0" is exactly the event number!
 	  analysisManager->FillNtupleIColumn(12,dHC3->entries());//nt ID=12
@@ -317,7 +317,7 @@ void ExG4EventAction::EndOfEventAction(const G4Event* event)
 	  if(totalEmE>400*CLHEP::keV)// if you comment this part out, the EMG effect will be disabled.
 	  {
 		  emg_sig = emg_sigp1*totalEmE*1000 + emg_sigp0;
-		  emg_tau = emg_taup1 * totalEmE * 1000 + emg_taup0;// +0.65;
+		  emg_tau = emg_taup1 * totalEmE * 1000 + emg_taup0;// +/-0.65;
 		  //G4cout<<"totalEmHit=	"<<totalEmHit<<"	totalEmE=	"<<totalEmE/CLHEP::keV<<"	emg_sig=	"<<emg_sig<<"	emg_tau=	"<<emg_tau<<G4endl;
 		  EMGf2->SetParameter(0,1.);//N
 		  EMGf2->SetParameter(1,emg_tau);//τ

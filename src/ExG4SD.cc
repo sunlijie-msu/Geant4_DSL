@@ -34,7 +34,7 @@ G4bool ExG4SD::ProcessHits(G4Step* step, G4TouchableHistory*)//invoked by G4Step
 	//G4cout<<"(3)[1]$ first in hit, by SD and hit, G4bool ExG4SD::ProcessHits(G4Step* step, G4TouchableHistory*)"<<G4endl;
   G4double edep = step->GetTotalEnergyDeposit();
   if(edep==0.) return true;
-  //G4StepPoint* preStepPoint = step->GetPreStepPoint();
+  //G4StepPoint* preStepPoint = step->GetPreStepPoint();//test
   G4StepPoint* preStepPoint = step->GetPostStepPoint();//modify
 
   //G4TouchableHistory* touchable = (G4TouchableHistory*)(preStepPoint->GetTouchable());
