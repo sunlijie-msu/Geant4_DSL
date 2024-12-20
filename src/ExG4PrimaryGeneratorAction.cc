@@ -222,7 +222,7 @@ void ExG4PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	//	Ebeam=128*CLHEP::MeV;
 
 	// 24Mg
-	Ebeam = CLHEP::RandGauss::shoot(75, 75 * 0.002 / 2.355) * CLHEP::MeV;//Energy loss in gold foil
+	Ebeam = CLHEP::RandGauss::shoot(75, 75 * 0.002 / 2.355) * CLHEP::MeV;// beam energy spread 0.2 % (FWHM) based on Oliver Kirsebom PRC2016
 	Ebeam = Ebeam - z0 * 1000 * 7.200; // stopping power of 75-MeV 24Mg in gold is approximately 7.2 MeV/um, z0 was the depth of 3He in units of mm.
 	//75-MeV 24Mg ions pass through 0.2 um thick gold lose 1.5 MeV
 	if (Ebeam < 0) Ebeam = 75 * CLHEP::MeV;
