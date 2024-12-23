@@ -298,9 +298,10 @@ void ExG4PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	Atarget = 3; Zrecoil = 12; Arecoil = 23; Zejectile = 2; Aejectile = 4;
 	Qvalue = 4.0464 * CLHEP::MeV; // gs Q-value
 	// 	Excitation_recoil=451*CLHEP::keV; tau=1659; //half-life in fs // 23Mg
-	//Excitation_recoil = 7782.7 * CLHEP::keV; tau = 7; //half-life in fs // true Ex for Q value
-	Excitation_recoil = 7784.7 * CLHEP::keV; tau = 7; //half-life in fs // true Ex for Q value
-	//Excitation_recoil = 7786.7 * CLHEP::keV; tau = 7; //half-life in fs // true Ex for Q value
+	//Excitation_recoil = 7782.7 * CLHEP::keV; tau = 7; //half-life in fs // Ex for Q value
+	//Excitation_recoil = 7784.7 * CLHEP::keV; tau = 7; //half-life in fs // true Ex for Q value
+	//Excitation_recoil = 7786.7 * CLHEP::keV; tau = 7; //half-life in fs // Ex for Q value
+	Excitation_recoil = 7788.7 * CLHEP::keV; tau = 10; //half-life in fs // Ex for Q value
 
 	// 31S + 4He
 //  	Atarget=3; Zrecoil=16; Arecoil=31; Zejectile=2; Aejectile=4;
@@ -330,8 +331,9 @@ void ExG4PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 //	Excitation_recoil = 6392.0531*CLHEP::keV; // E high an annoying mean-max correction in EMG function
 	//	Excitation_recoil=4157*CLHEP::keV; // use this if it's on fishtank
 	//Excitation_recoil = 7335.17 * CLHEP::keV; // Eg low = 7331.20 keV
-	Excitation_recoil = 7337.17 * CLHEP::keV; // Eg medium = 7333.20 keV
+	//Excitation_recoil = 7337.17 * CLHEP::keV; // Eg medium = 7333.20 keV
 	//Excitation_recoil = 7339.17 * CLHEP::keV; // Eg high = 7335.20 keV
+	Excitation_recoil = 7341.17 * CLHEP::keV; // Eg high2 = 7337.20 keV
 
 		
 	int AngularDistribution = 0;
