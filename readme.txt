@@ -2,10 +2,29 @@ DSL1 and DSL2 simulation
 VMware:
 
 godsl
-cd /home/sun/app/Geant4_DSL-build
+cd /mnt/hgfs/Geant4_DSL/Build_Geant4_DSL/
 
 1) cmd
 cmake -DGeant4_DIR=/home/sun/app/geant4.10.02-install/lib/Geant4-10.2.3 /mnt/hgfs/Geant4_DSL
+
+-- The C compiler identification is GNU 9.4.0
+-- The CXX compiler identification is GNU 9.4.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ROOT 6.06/08 in /home/sun/app/root6
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /mnt/hgfs/Geant4_DSL/Build_Geant4_DSL
 
 2) make
 

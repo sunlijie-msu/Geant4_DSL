@@ -47,7 +47,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /mnt/hgfs/Geant4_DSL
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/sun/app/Build_Geant4_DSL
+CMAKE_BINARY_DIR = /mnt/hgfs/Geant4_DSL/Build_Geant4_DSL
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -74,14 +74,14 @@ clean: CMakeFiles/tele.dir/clean
 CMakeFiles/tele.dir/all:
 	$(MAKE) -f CMakeFiles/tele.dir/build.make CMakeFiles/tele.dir/depend
 	$(MAKE) -f CMakeFiles/tele.dir/build.make CMakeFiles/tele.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/sun/app/Build_Geant4_DSL/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11 "Built target tele"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/hgfs/Geant4_DSL/Build_Geant4_DSL/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11 "Built target tele"
 .PHONY : CMakeFiles/tele.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/tele.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/sun/app/Build_Geant4_DSL/CMakeFiles 11
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/hgfs/Geant4_DSL/Build_Geant4_DSL/CMakeFiles 11
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/tele.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/sun/app/Build_Geant4_DSL/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/hgfs/Geant4_DSL/Build_Geant4_DSL/CMakeFiles 0
 .PHONY : CMakeFiles/tele.dir/rule
 
 # Convenience name for target.

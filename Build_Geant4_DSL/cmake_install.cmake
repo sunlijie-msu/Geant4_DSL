@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/sun/app/Build_Geant4_DSL/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/mnt/hgfs/Geant4_DSL/Build_Geant4_DSL/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

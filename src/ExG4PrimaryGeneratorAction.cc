@@ -294,15 +294,6 @@ void ExG4PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	// 	Qvalue=-0.597*CLHEP::MeV; // gs Q-value
 	// 	Excitation_recoil=4144*CLHEP::keV; tau=30; //fs // 30P
 
-		// 23Mg + 4He
-	Atarget = 3; Zrecoil = 12; Arecoil = 23; Zejectile = 2; Aejectile = 4;
-	Qvalue = 4.0464 * CLHEP::MeV; // gs Q-value
-	// 	Excitation_recoil=451*CLHEP::keV; tau=1659; //half-life in fs // 23Mg
-	//Excitation_recoil = 7782.7 * CLHEP::keV; tau = 7; //half-life in fs // Ex for Q value
-	//Excitation_recoil = 7784.7 * CLHEP::keV; tau = 7; //half-life in fs // true Ex for Q value
-	//Excitation_recoil = 7786.7 * CLHEP::keV; tau = 7; //half-life in fs // Ex for Q value
-	Excitation_recoil = 7788.7 * CLHEP::keV; tau = 30; //half-life in fs // Ex for Q value
-
 	// 31S + 4He
 //  	Atarget=3; Zrecoil=16; Arecoil=31; Zejectile=2; Aejectile=4;
 //  	Qvalue=5.533*CLHEP::MeV; // gs Q-value, uncertainty is negligible
@@ -315,6 +306,15 @@ void ExG4PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 //	Excitation_recoil = 6390.62 * CLHEP::keV; tau = 15; //lifetime in fs // 31S Ex high
 	//Reasonable Doppler shift regardless of final states defined in the data/PhotonEvaporation3.2/z.a (Verified)
 
+		// 23Mg + 4He
+	Atarget = 3; Zrecoil = 12; Arecoil = 23; Zejectile = 2; Aejectile = 4;
+	Qvalue = 4.0464 * CLHEP::MeV; // gs Q-value
+	// 	Excitation_recoil=451*CLHEP::keV; tau=1659; //half-life in fs // 23Mg
+	//Excitation_recoil = 7782.7 * CLHEP::keV; tau = 7; //half-life in fs // Ex for Q value
+	Excitation_recoil = 7784.7 * CLHEP::keV; tau = 7; //half-life in fs // true Ex for Q value
+	//Excitation_recoil = 7786.7 * CLHEP::keV; tau = 7; //half-life in fs // Ex for Q value
+	//Excitation_recoil = 7788.7 * CLHEP::keV; tau = 30; //half-life in fs // Ex for Q value
+
 	Excitation_ejectile = 0; // don't change
 	Qvalue = Qvalue - Excitation_recoil; // effective Q-value. don't change
 	// cout << Qvalue / CLHEP::MeV << G4endl;
@@ -324,26 +324,23 @@ void ExG4PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	//	cout<<tau/CLHEP::ns<<G4endl;
 	ioncharge = 0. * CLHEP::eplus; // don't change
 
-	//	Excitation_recoil=1248.9836*CLHEP::keV; // an annoying mean-max correction in EMG function
-	//	Excitation_recoil=2235.0743*CLHEP::keV; // an annoying mean-max correction in EMG function
-//	Excitation_recoil = 6391.4331*CLHEP::keV; // E low an annoying mean-max correction in EMG function modify
-//	Excitation_recoil = 6391.7431*CLHEP::keV; // E middle an annoying mean-max correction in EMG function
-//	Excitation_recoil = 6392.0531*CLHEP::keV; // E high an annoying mean-max correction in EMG function
-	//	Excitation_recoil=4157*CLHEP::keV; // use this if it's on fishtank
+	//	Excitation_recoil=1248.9836*CLHEP::keV; // an mean-max correction in EMG function
+	//	Excitation_recoil=2235.0743*CLHEP::keV; // an mean-max correction in EMG function
+	//	Excitation_recoil = 6391.7431*CLHEP::keV; // an mean-max correction in EMG function
 	//Excitation_recoil = 7335.17 * CLHEP::keV; // Eg low = 7331.20 keV
-	//Excitation_recoil = 7337.17 * CLHEP::keV; // Eg medium = 7333.20 keV
+	Excitation_recoil = 7337.17 * CLHEP::keV; // Eg medium = 7333.20 keV
 	//Excitation_recoil = 7339.17 * CLHEP::keV; // Eg high = 7335.20 keV
-	Excitation_recoil = 7341.17 * CLHEP::keV; // Eg high2 = 7337.20 keV
+	//Excitation_recoil = 7341.17 * CLHEP::keV; // Eg high2 = 7337.20 keV
 
 		
-	int AngularDistribution = 0;
+	int AngularDistribution = 1;
 	if (AngularDistribution == 1) // slower than AD = 0
 	{
 		ad = new TF1("ad", "[0]+[1]*1./2.*(3.*x*x-1.)+[2]*1./8.*(35.*x*x*x*x-30.*x*x+3.)", -1.0, 1.0); // x means costheta
 		ad->SetParameter(0, 1.0); // set value of parameter 0 (a0=1 always)
-		ad->SetParameter(1, 0.0); // set value of parameter 1 (a2=0 means isotropic)
+		ad->SetParameter(1, -0.8); // set value of parameter 1 (a2=0 means isotropic; a2>0 means forward-backward enhancement; a2=-1 means forward-backward suppression)
 		ad->SetParameter(2, 0.0); // set value of parameter 2 (a4)
-		costheta_p1 = ad->GetRandom(0.71, 1.0); // starting point, if angular distribution is needed.
+		costheta_p1 = ad->GetRandom(0.79, 1.0); // starting point, if angular distribution is needed.
 	}
 
 	if (AngularDistribution == 0)

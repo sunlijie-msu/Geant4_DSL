@@ -33,7 +33,7 @@
 #
 # Specify view angle:
 ##/vis/viewer/set/viewpointVector -1 0 0
-/vis/viewer/set/viewpointThetaPhi 90. 180.
+/vis/viewer/set/viewpointThetaPhi 95. 170.
 /vis/viewer/set/lightsVector 0 1 -10
 #
 # Specify zoom value:

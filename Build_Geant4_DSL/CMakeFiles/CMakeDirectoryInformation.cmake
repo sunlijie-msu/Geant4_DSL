@@ -3,7 +3,7 @@
 
 # Relative path conversion top directories.
 set(CMAKE_RELATIVE_PATH_TOP_SOURCE "/mnt/hgfs/Geant4_DSL")
-set(CMAKE_RELATIVE_PATH_TOP_BINARY "/home/sun/app/Build_Geant4_DSL")
+set(CMAKE_RELATIVE_PATH_TOP_BINARY "/mnt/hgfs/Geant4_DSL/Build_Geant4_DSL")
 
 # Force unix paths in dependencies.
 set(CMAKE_FORCE_UNIX_PATHS 1)

@@ -4,16 +4,16 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/mnt/hgfs/Geant4_DSL/src/ExG4ActionInitialization.cc" "/home/sun/app/Build_Geant4_DSL/CMakeFiles/tele.dir/src/ExG4ActionInitialization.cc.o"
-  "/mnt/hgfs/Geant4_DSL/src/ExG4DetectorConstruction.cc" "/home/sun/app/Build_Geant4_DSL/CMakeFiles/tele.dir/src/ExG4DetectorConstruction.cc.o"
-  "/mnt/hgfs/Geant4_DSL/src/ExG4EventAction.cc" "/home/sun/app/Build_Geant4_DSL/CMakeFiles/tele.dir/src/ExG4EventAction.cc.o"
-  "/mnt/hgfs/Geant4_DSL/src/ExG4Hit.cc" "/home/sun/app/Build_Geant4_DSL/CMakeFiles/tele.dir/src/ExG4Hit.cc.o"
-  "/mnt/hgfs/Geant4_DSL/src/ExG4PhysicsList.cc" "/home/sun/app/Build_Geant4_DSL/CMakeFiles/tele.dir/src/ExG4PhysicsList.cc.o"
-  "/mnt/hgfs/Geant4_DSL/src/ExG4PrimaryGeneratorAction.cc" "/home/sun/app/Build_Geant4_DSL/CMakeFiles/tele.dir/src/ExG4PrimaryGeneratorAction.cc.o"
-  "/mnt/hgfs/Geant4_DSL/src/ExG4RunAction.cc" "/home/sun/app/Build_Geant4_DSL/CMakeFiles/tele.dir/src/ExG4RunAction.cc.o"
-  "/mnt/hgfs/Geant4_DSL/src/ExG4SD.cc" "/home/sun/app/Build_Geant4_DSL/CMakeFiles/tele.dir/src/ExG4SD.cc.o"
-  "/mnt/hgfs/Geant4_DSL/src/PhysListEmStandard.cc" "/home/sun/app/Build_Geant4_DSL/CMakeFiles/tele.dir/src/PhysListEmStandard.cc.o"
-  "/mnt/hgfs/Geant4_DSL/tele.cc" "/home/sun/app/Build_Geant4_DSL/CMakeFiles/tele.dir/tele.cc.o"
+  "/mnt/hgfs/Geant4_DSL/src/ExG4ActionInitialization.cc" "/mnt/hgfs/Geant4_DSL/Build_Geant4_DSL/CMakeFiles/tele.dir/src/ExG4ActionInitialization.cc.o"
+  "/mnt/hgfs/Geant4_DSL/src/ExG4DetectorConstruction.cc" "/mnt/hgfs/Geant4_DSL/Build_Geant4_DSL/CMakeFiles/tele.dir/src/ExG4DetectorConstruction.cc.o"
+  "/mnt/hgfs/Geant4_DSL/src/ExG4EventAction.cc" "/mnt/hgfs/Geant4_DSL/Build_Geant4_DSL/CMakeFiles/tele.dir/src/ExG4EventAction.cc.o"
+  "/mnt/hgfs/Geant4_DSL/src/ExG4Hit.cc" "/mnt/hgfs/Geant4_DSL/Build_Geant4_DSL/CMakeFiles/tele.dir/src/ExG4Hit.cc.o"
+  "/mnt/hgfs/Geant4_DSL/src/ExG4PhysicsList.cc" "/mnt/hgfs/Geant4_DSL/Build_Geant4_DSL/CMakeFiles/tele.dir/src/ExG4PhysicsList.cc.o"
+  "/mnt/hgfs/Geant4_DSL/src/ExG4PrimaryGeneratorAction.cc" "/mnt/hgfs/Geant4_DSL/Build_Geant4_DSL/CMakeFiles/tele.dir/src/ExG4PrimaryGeneratorAction.cc.o"
+  "/mnt/hgfs/Geant4_DSL/src/ExG4RunAction.cc" "/mnt/hgfs/Geant4_DSL/Build_Geant4_DSL/CMakeFiles/tele.dir/src/ExG4RunAction.cc.o"
+  "/mnt/hgfs/Geant4_DSL/src/ExG4SD.cc" "/mnt/hgfs/Geant4_DSL/Build_Geant4_DSL/CMakeFiles/tele.dir/src/ExG4SD.cc.o"
+  "/mnt/hgfs/Geant4_DSL/src/PhysListEmStandard.cc" "/mnt/hgfs/Geant4_DSL/Build_Geant4_DSL/CMakeFiles/tele.dir/src/PhysListEmStandard.cc.o"
+  "/mnt/hgfs/Geant4_DSL/tele.cc" "/mnt/hgfs/Geant4_DSL/Build_Geant4_DSL/CMakeFiles/tele.dir/tele.cc.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -44,7 +44,7 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/mnt/hgfs/Geant4_DSL/include"
+  "../include"
   "/home/sun/app/root6/include"
   "/home/sun/app/geant4.10.02-install/include/Geant4"
   "/usr/include/x86_64-linux-gnu/qt5"

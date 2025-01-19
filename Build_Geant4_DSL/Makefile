@@ -51,7 +51,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /mnt/hgfs/Geant4_DSL
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/sun/app/Build_Geant4_DSL
+CMAKE_BINARY_DIR = /mnt/hgfs/Geant4_DSL/Build_Geant4_DSL
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/sun/app/Build_Geant4_DSL/CMakeFiles /home/sun/app/Build_Geant4_DSL/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/hgfs/Geant4_DSL/Build_Geant4_DSL/CMakeFiles /mnt/hgfs/Geant4_DSL/Build_Geant4_DSL/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/sun/app/Build_Geant4_DSL/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/hgfs/Geant4_DSL/Build_Geant4_DSL/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
