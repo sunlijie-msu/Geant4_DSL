@@ -338,7 +338,7 @@ void ExG4PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	{
 		ad = new TF1("ad", "[0]+[1]*1./2.*(3.*x*x-1.)+[2]*1./8.*(35.*x*x*x*x-30.*x*x+3.)", -1.0, 1.0); // x means costheta
 		ad->SetParameter(0, 1.0); // set value of parameter 0 (a0=1 always)
-		ad->SetParameter(1, -0.8); // set value of parameter 1 (a2=0 means isotropic; a2>0 means forward-backward enhancement; a2=-1 means forward-backward suppression)
+		ad->SetParameter(1, -0.3); // set value of parameter 1 (a2=0 means isotropic; a2>0 means forward-backward enhancement; a2=-1 means forward-backward suppression)
 		ad->SetParameter(2, 0.0); // set value of parameter 2 (a4)
 		costheta_p1 = ad->GetRandom(0.79, 1.0); // starting point, if angular distribution is needed.
 	}
