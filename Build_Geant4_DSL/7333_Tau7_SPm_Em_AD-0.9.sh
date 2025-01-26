@@ -1,5 +1,5 @@
-num1=1
-num2=10
+num1=23
+num2=25
  #num1<num2
 cd /mnt/hgfs/Geant4_DSL/Build_Geant4_DSL
  for((i=${num1};i<=${num2};i+=1));
