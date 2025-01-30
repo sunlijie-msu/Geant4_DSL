@@ -41,12 +41,9 @@ ExG4PrimaryGeneratorAction::ExG4PrimaryGeneratorAction()
 	// 	xygaus->SetNpy(200);  // 2D Gaussian beam spot
 	Rmax = 1.0 * CLHEP::mm;  // 2D Uniform beam spot // in units of mm. G4ThreeVector(mm)
 
-	pFile = new TFile("depth.root", "read"); // put the depth.root file under the build directory
-	//pFile=new TFile("/mnt/hgfs/HPGe/P26_pz.root","read");
-	//pFile=new TFile("/mnt/hgfs/HPGe/Si25_pz.root","read");
-	//pFile=new TFile("/mnt/hgfs/HPGe/Al22_pz.root","read");
-	//pFile=new TFile("/mnt/hgfs/HPGe/S27simulate.root","read");
-	//fout = fopen ("out.txt", "w");
+	pFile_depth = new TFile("depth.root", "read"); // put the depth.root file under the build directory
+	pFile_ad = new TFile("Fresco_angular_distribution.root", "read"); // put the Fresco_angular_distribution.root file under the build directory
+	fout = fopen ("out.txt", "w");
 
 //	numpeaks=1;//23 or 53 for 29Na, 46 or 88 for 30Na. with Doppler, 62 for 29Na, 1 for test
 //	branch_lit_tot=0;
@@ -102,8 +99,9 @@ ExG4PrimaryGeneratorAction::ExG4PrimaryGeneratorAction()
 ExG4PrimaryGeneratorAction::~ExG4PrimaryGeneratorAction()
 {
 	G4cout << "8$ after run, by run, ExG4PrimaryGeneratorAction::~ExG4PrimaryGeneratorAction()" << G4endl;
-	pFile->Close();
-	//fclose(fout);
+	pFile_depth->Close();
+	pFile_ad->Close();
+	fclose(fout);
 	//	fclose(fin);//VMware
 	delete fParticleGun;
 }
@@ -117,17 +115,14 @@ void ExG4PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	theta_beam = gRandom->Uniform(0, 2. * 3.14159);  // 2D Uniform beam spot
 	x0 = r_beam * cos(theta_beam);  // 2D Uniform beam spot
 	y0 = r_beam * sin(theta_beam);  // 2D Uniform beam spot
-	depth_3He = (TH1F*)pFile->Get("depth");//Get("depth");//read implantation depth from root for 3He-implanted gold target
+	depth_3He = (TH1F*)pFile_depth->Get("depth");//read implantation depth from root for 3He-implanted gold target
 	z0 = depth_3He->GetRandom() * CLHEP::nm;//Return a random number distributed according the histogram depth_3He
+	angular_distribution_from_Fresco = (TH1F*)pFile_ad->Get("angular_distribution");//read angular distribution from root for alpha emission
 	// 	z0=gRandom->Gaus(4.600,0.420)*CLHEP::um; // test for Nick's target implanted at LLNL
 	// 	if(z0<0) z0=0; // test for Nick's target implanted at LLNL
 	//G4cout<<"++++++++++++  x0="<<x0/CLHEP::mm<<"  y0="<<y0/CLHEP::mm<<"  z0="<<z0/CLHEP::nm<<G4endl;
 
-		//py_impl=(TH1F*)pFile->Get("himpl40py");//Get("hy2");//from implantation root for DSSD2
-		//pz_impl=(TH1D*)pFile->Get("himpl40pz");//Get("hz2");//from implantation root for DSSD2
-		//	px_impl=(TH1F*)pFile->Get("himpl304px");//Get("hx2");//from implantation root for Target
-		//	py_impl=(TH1F*)pFile->Get("himpl304py");//Get("hy2");//from implantation root for Target
-		//	pz_impl=(TH1D*)pFile->Get("himpl304pz");//Get("hz2");//from implantation root for Target
+
 		//	y0=py_impl->GetRandom()*CLHEP::mm;//from implantation root for both DSSD2\3
 		//	z0=pz_impl->GetRandom()*0.001*CLHEP::mm;//from implantation root for both DSSD2\3
 		//	for(;x0>49.5/2||x0<-49.5/2;){x0=px_impl->GetRandom()*CLHEP::mm;}//from implantation root for both DSSD2\3. To ensure an appropriate x0.
@@ -138,8 +133,6 @@ void ExG4PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 		//	z0=19-0.304/2.0+z0;//from implantation root for Target
 		//x0=G4UniformRand();
 		//x0=0; y0=0; z0=0*CLHEP::mm;//fixed point
-		//G4cout<<pz300->GetMean()<<G4endl;
-		//G4cout<<"yangbiao test : RMS of h1 is "<<((TH1F*)pFile->Get("h1"))->GetMean()<<G4endl;
 
 	//	branch_integ=CLHEP::RandFlat::shoot(0.0,branch_lit_tot);
 
@@ -333,8 +326,16 @@ void ExG4PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	//Excitation_recoil = 7341.17 * CLHEP::keV; // Eg high2 = 7337.20 keV
 
 		
-	int AngularDistribution = 1;
-	if (AngularDistribution == 1) // slower than AD = 0
+	int AngularDistribution = 2;
+	if (AngularDistribution == 2) // sample alpha emission angle from angular distribution histogram
+	{
+		theta_p1 = angular_distribution_from_Fresco->GetRandom();
+		costheta_p1 = cos(theta_p1 * CLHEP::deg);	// cos() function needs angle in radian
+		//G4cout << costheta_p1 << "	" << theta_p1 << G4endl;
+		//fprintf(fout, "%f\n", theta_p1); // output the angular distribution to a txt file for check
+	}
+
+	if (AngularDistribution == 1) // sample alpha emission angle from Legendre polynomial function
 	{
 		ad = new TF1("ad", "[0]+[1]*1./2.*(3.*x*x-1.)+[2]*1./8.*(35.*x*x*x*x-30.*x*x+3.)", -1.0, 1.0); // x means costheta
 		ad->SetParameter(0, 1.0); // set value of parameter 0 (a0=1 always)
@@ -343,7 +344,7 @@ void ExG4PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 		costheta_p1 = ad->GetRandom(0.79, 1.0); // starting point, if angular distribution is needed.
 	}
 
-	if (AngularDistribution == 0)
+	if (AngularDistribution == 0) // sample alpha emission angle from isotropic distribution
 	{
 		costheta_p1 = CLHEP::RandFlat::shoot(0.79, 1.0); // alpha particles emitted at forward angles along z-axis. starting point!
 		//(0.50,1.) = <60 deg, (0.57,1.) = <55 deg (theta alpha 6390 31S), (0.71,1.) = <45 deg, (0.78,1.) = <39 deg, (0.90,1.) = <25.8 deg, (0.94,1.) = <20 deg for final DSL1 restuls, (0.97,1.) = <14 deg, (0.979,1.) = <11.6 deg, (-1.,1.) 180 deg

@@ -60,10 +60,12 @@ public:
 
 private:
   G4ParticleGun* fParticleGun;
-	TFile *pFile;
-	//FILE *fout;
+	TFile *pFile_depth;
+	TFile *pFile_ad;
+	FILE *fout;
 	int wheretorun;
  	TH1F *depth_3He;
+	TH1F *angular_distribution_from_Fresco;
 // 	TH1F *py_impl;
 //     TH1D *pz_impl;// TH1F *pz = new TH1F("pz","pz",4000,0,4000); The whole sentence cannot be written in .hh
 	TF2 *xygaus; // 2D Gaussian beam spot

@@ -77,7 +77,4 @@
 /gui/addIcon "Run beam on" user_icon "/run/beamOn 1" run.png
 /run/beamOn 1
 /vis/scene/notifyHandlers scene-0
-/run/beamOn 3
-/vis/viewer/set/picking false
-/vis/viewer/refresh
-/run/beamOn 10
+/run/beamOn 11
